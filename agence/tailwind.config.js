@@ -18,4 +18,16 @@ export default {
     },
 
     plugins: [forms],
+    
+    
+    theme: {
+        extend: {
+          colors: {
+            fondclair: '#E7ECF0', // Ton alias
+          },
+        },
+      },
+      plugins: [],
+    
 };
+
