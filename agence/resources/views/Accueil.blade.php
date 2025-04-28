@@ -224,7 +224,99 @@
 </div>
 
 
+<section class="py-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+        <!-- Titre principal -->
+        <h1 class="text-3xl md:text-4xl font-bold text-center text-[#0C4069] mb-12">
+            Pourquoi choisir AKM Voyages ?
+        </h1>
+        
+        <p class="text-lg text-gray-600 text-center mb-12 max-w-3xl mx-auto">
+            Ce qui fait de nous votre meilleur choix pour réserver et voyager en toute sérénité :
+        </p>
+        
+        <!-- Grille d'avantages -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <!-- Carte Paiement Sécurisé -->
+            <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-all duration-300 hover:scale-105 group border border-transparent hover:border-akm-orange/30">
+                <div class="mb-4 flex justify-center">
+                    <div class="bg-akm-orange/10 p-4 rounded-full group-hover:bg-akm-orange/20 transition-colors duration-300">
+                        <i class="fas fa-lock text-3xl text-[#D88F42]"></i>
+                    </div>
+                </div>
+                <h2 class="text-xl font-semibold text-akm-orange mb-3 text-center">Paiement Sécurisé</h2>
+                <p class="text-gray-600 text-center">
+                    Toutes vos transactions sont cryptées pour garantir une sécurité maximale.
+                </p>
+            </div>
+            
+            <!-- Carte Meilleurs Prix -->
+            <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-all duration-300 hover:scale-105 group border border-transparent hover:border-akm-orange/30">
+                <div class="mb-4 flex justify-center">
+                    <div class="bg-akm-orange/10 p-4 rounded-full group-hover:bg-akm-orange/20 transition-colors duration-300">
+                        <i class="fas fa-tag text-3xl text-[#D88F42]"></i>
+                    </div>
+                </div>
+                <h2 class="text-xl font-semibold text-akm-orange mb-3 text-center">Meilleurs Prix</h2>
+                <p class="text-gray-600 text-center">
+                    Profitez des offres exclusives négociées auprès de nos partenaires sans frais cachés.
+                </p>
+            </div>
+            
+            <!-- Carte Satisfaction Garantie -->
+            <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-all duration-300 hover:scale-105 group border border-transparent hover:border-akm-orange/30">
+                <div class="mb-4 flex justify-center">
+                    <div class="bg-akm-orange/10 p-4 rounded-full group-hover:bg-akm-orange/20 transition-colors duration-300">
+                        <i class="fas fa-thumbs-up text-3xl text-[#D88F42]"></i>
+                    </div>
+                </div>
+                <h2 class="text-xl font-semibold text-akm-orange mb-3 text-center">Satisfaction Garantie</h2>
+                <p class="text-gray-600 text-center">
+                    Nos clients nous recommandent pour notre professionnalisme et notre écoute.
+                </p>
+            </div>
+            
+            <!-- Carte Assistance 24/7 -->
+            <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-all duration-300 hover:scale-105 group border border-transparent hover:border-akm-orange/30">
+                <div class="mb-4 flex justify-center">
+                    <div class="bg-akm-orange/10 p-4 rounded-full group-hover:bg-akm-orange/20 transition-colors duration-300">
+                        <i class="fas fa-headset text-3xl text-[#D88F42]"></i>
+                    </div>
+                </div>
+                <h2 class="text-xl font-semibold text-akm-orange mb-3 text-center">Assistance 24/7</h2>
+                <p class="text-gray-600 text-center">
+                    Une équipe disponible à tout moment pour répondre à vos besoins.
+                </p>
+            </div>
+        </div>
+    </section>
 
+
+<!-- Testimonials Section -->
+<section class="bg-[#0C4069] py-16">
+    <div class="container mx-auto px-4">
+        <div id="testimonialSlider" class="max-w-4xl mx-auto relative">
+            <!-- Single Testimonial -->
+            <div class="bg-white rounded-3xl p-12 shadow-lg">
+                <div class="flex items-center gap-6 mb-8">
+                    <img src="{{ asset('build/assets/image/testimonials/fatima.jpg') }}" 
+                         alt="Fatima" 
+                         class="w-24 h-24 rounded-full object-cover">
+                    <h3 class="text-2xl font-semibold text-[#0C4069]">Fatima D. - N'Djamena</h3>
+                </div>
+                <p class="text-gray-700 text-lg leading-relaxed">
+                    "Un service rapide, professionnel et très à l'écoute. Mon voyage a été parfaitement organisé du début à la fin. Je recommande vivement !"
+                </p>
+                <!-- Navigation Arrows -->
+                <div class="absolute right-4 top-1/2 -translate-y-1/2">
+                    <button class="bg-[#D88F42] text-white rounded-full p-4 hover:bg-[#0C4069] transition-colors">
+                        <i class="fas fa-arrow-right text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+    
     <script>
        // le menu
        document.getElementById('menu-toggle').addEventListener('click', function() {
