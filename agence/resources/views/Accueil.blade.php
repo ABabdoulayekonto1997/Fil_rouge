@@ -8,6 +8,7 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
 </head>
 <body>
+
     <header class="bg-white px-6 py-4 shadow-md">
         <div class="container mx-auto ">
             <div class="flex items-center">
@@ -111,7 +112,7 @@
     </div>
 
     <!-- Destination -->
-<section class="container mx-auto py-16">
+    <section class="container mx-auto py-16">
 
 <div class="text-center mb-12">
         <h2 class="text-3xl font-bold text-[#0C4069] mb-4">Destinations Populaires</h2>
@@ -181,11 +182,11 @@
             </div>
         </div>
     </div>
-</section>
+    </section>
 
 <!-- Grand div avec fond orange -->
 
-<div class="bg-[#D88F42] w-full h-[650px] flex items-center justify-center">
+    <div class="bg-[#D88F42] w-full h-[650px] flex items-center justify-center">
   
   <!-- Petite div centrée plus grande -->
   <div class="bg-white p-12 rounded-lg shadow-lg max-w-5xl w-full">
@@ -221,10 +222,10 @@
 
   </div>
 
-</div>
+    </div>
 
 
-<section class="py-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+    <section class="py-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
         <!-- Titre principal -->
         <h1 class="text-3xl md:text-4xl font-bold text-center text-[#0C4069] mb-12">
             Pourquoi choisir AKM Voyages ?
@@ -292,9 +293,9 @@
 
 
 <!-- Testimonials Section -->
-<section class="bg-[#0C4069] py-16">
+    <section class="bg-[#0C4069] py-16">
     <div class="container mx-auto px-4">
-        <div id="testimonialSlider" class="max-w-4xl mx-auto relative">
+        < id="testimonialSlider" class="max-w-4xl mx-auto relative">
             <!-- Single Testimonial -->
             <div class="bg-white rounded-3xl p-12 shadow-lg">
                 <div class="flex items-center gap-6 mb-8">
@@ -313,10 +314,11 @@
                     </button>
                 </div>
             </div>
-        </div>
+        
     </div>
-</section>
-    
+    </section>
+
+
     <script>
        // le menu
        document.getElementById('menu-toggle').addEventListener('click', function() {
