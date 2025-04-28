@@ -4,8 +4,27 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Accueil</title>
+<!-- Add Alpine.js for animations -->
+<script defer src="https://unpkg.com/@alpinejs/collapse@3.x.x/dist/cdn.min.js"></script>
+<script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'akm-orange': '#D88F42',
+                        'akm-blue': '#0C4069',
+                    },
+                    backgroundImage: {
+                        'footer-texture': "url('https://images.unsplash.com/photo-1483729558449-99ef09a8c325?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80')",
+                    }
+                }
+            }
+        }
+    </script>
 </head>
 <body>
 
@@ -291,81 +310,356 @@
         </div>
     </section>
 
+<section class="py-16 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto">
+        <!-- Titre principal -->
+        <div class="text-center mb-12">
+            <h1 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Comment ça marche ?</h1>
+            <p class="text-lg text-gray-600">
+                Planifiez votre prochain voyage en toute simplicité avec AKM Voyage.<br>
+                Voici comment faire en 4 étapes simples et rapides
+            </p>
+        </div>
+
+        <!-- Étapes - Ligne 1 -->
+        <div class="flex flex-col md:flex-row gap-6 mb-6">
+            <!-- Étape 1 -->
+            <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100 w-full md:w-1/2 hover:border-[#D88F42] transition-colors duration-300">
+                <div class="flex items-center mb-4">
+                    <div class="bg-akm-orange text-white rounded-full w-10 h-10 flex items-center justify-center font-bold text-lg mr-4">1</div>
+                    <h2 class="text-xl font-semibold text-gray-800">Recherchez votre destination</h2>
+                </div>
+                <p class="text-gray-600">
+                    Entrez votre ville de départ, votre destination, les dates de voyage et le nombre de passagers. Notre moteur intelligent vous propose les meilleures options disponibles en temps réel.
+                </p>
+            </div>
+
+            <!-- Étape 2 -->
+            <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100 w-full md:w-1/2 hover:border-[#D88F42] transition-colors duration-300">
+                <div class="flex items-center mb-4">
+                    <div class="bg-akm-orange text-white rounded-full w-10 h-10 flex items-center justify-center font-bold text-lg mr-4">2</div>
+                    <h2 class="text-xl font-semibold text-gray-800">Comparez les offres</h2>
+                </div>
+                <p class="text-gray-600">
+                    Consultez une liste d'options avec les détails de prix, de durée et de services inclus. Comparez facilement les vols, les hôtels ou les packs complets pour choisir ce qui vous convient.
+                </p>
+            </div>
+        </div>
+
+        <!-- Étapes - Ligne 2 -->
+        <div class="flex flex-col md:flex-row gap-6">
+            <!-- Étape 3 -->
+            <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100 w-full md:w-1/2 hover:border-[#D88F42] transition-colors duration-300">
+                <div class="flex items-center mb-4">
+                    <div class="bg-akm-orange text-white rounded-full w-10 h-10 flex items-center justify-center font-bold text-lg mr-4">3</div>
+                    <h2 class="text-xl font-semibold text-gray-800">Réservez en toute sécurité</h2>
+                </div>
+                <p class="text-gray-600">
+                    Une fois votre choix fait, remplissez les informations nécessaires (nom, contact, etc.) et effectuez votre paiement via notre plateforme 100% sécurisée. Vous recevrez une confirmation instantanée.
+                </p>
+            </div>
+
+            <!-- Étape 4 -->
+            <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100 w-full md:w-1/2 hover:border-[#D88F42] transition-colors duration-300">
+                <div class="flex items-center mb-4">
+                    <div class="bg-akm-orange text-white rounded-full w-10 h-10 flex items-center justify-center font-bold text-lg mr-4">4</div>
+                    <h2 class="text-xl font-semibold text-gray-800">Voyagez l'esprit tranquille</h2>
+                </div>
+                <p class="text-gray-600">
+                    Recevez votre billet ou votre bon de réservation par email ou WhatsApp. Il ne vous reste plus qu'à faire vos valises ! Notre service client est disponible à tout moment en cas de besoin.
+                </p>
+            </div>
+        </div>
+</section>
+  
 
 <!-- Testimonials Section -->
-    <section class="bg-[#0C4069] py-16">
-    <div class="container mx-auto px-4">
-        < id="testimonialSlider" class="max-w-4xl mx-auto relative">
-            <!-- Single Testimonial -->
-            <div class="bg-white rounded-3xl p-12 shadow-lg">
-                <div class="flex items-center gap-6 mb-8">
-                    <img src="{{ asset('build/assets/image/testimonials/fatima.jpg') }}" 
-                         alt="Fatima" 
-                         class="w-24 h-24 rounded-full object-cover">
-                    <h3 class="text-2xl font-semibold text-[#0C4069]">Fatima D. - N'Djamena</h3>
+<section class="bg-[#0C4069] py-16">
+        <div class="container mx-auto px-4 relative">
+            <!-- Titre section -->
+            <h2 class="text-3xl md:text-4xl font-bold text-white text-center mb-12">Ils nous ont fait confiance</h2>
+            
+            <!-- Conteneur témoignages -->
+            <div class="max-w-4xl mx-auto relative">
+                <!-- Témoignage -->
+                <div class="bg-white rounded-3xl p-8 md:p-12 shadow-lg relative">
+                    <!-- Photo + Nom -->
+                    <div class="flex flex-col md:flex-row items-center gap-6 mb-8">
+                        <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&h=200&q=80" 
+                             alt="Fatima" 
+                             class="w-20 h-20 md:w-24 md:h-24 rounded-full object-cover border-4 border-[#D88F42]">
+                        <div class="text-center md:text-left">
+                            <h3 class="text-xl md:text-2xl font-semibold text-[#0C4069]">Fatima D.</h3>
+                            <p class="text-gray-500">N'Djamena, Tchad</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Citation -->
+                    <div class="relative">
+                        <i class="fas fa-quote-left text-[#D88F42] text-4xl opacity-20 absolute -top-4 -left-2"></i>
+                        <p class="text-gray-700 text-base md:text-lg leading-relaxed italic pl-8">
+                            "Un service rapide, professionnel et très à l'écoute. Mon voyage a été parfaitement organisé du début à la fin. Je recommande vivement !"
+                        </p>
+                        <i class="fas fa-quote-right text-[#D88F42] text-4xl opacity-20 absolute -bottom-4 -right-2"></i>
+                    </div>
+                    
+                    <!-- Indicateurs -->
+                    <div class="flex justify-center gap-2 mt-8">
+                        <span class="w-3 h-3 rounded-full bg-[#D88F42]"></span>
+                        <span class="w-3 h-3 rounded-full bg-gray-300"></span>
+                        <span class="w-3 h-3 rounded-full bg-gray-300"></span>
+                    </div>
                 </div>
-                <p class="text-gray-700 text-lg leading-relaxed">
-                    "Un service rapide, professionnel et très à l'écoute. Mon voyage a été parfaitement organisé du début à la fin. Je recommande vivement !"
-                </p>
-                <!-- Navigation Arrows -->
-                <div class="absolute right-4 top-1/2 -translate-y-1/2">
-                    <button class="bg-[#D88F42] text-white rounded-full p-4 hover:bg-[#0C4069] transition-colors">
-                        <i class="fas fa-arrow-right text-xl"></i>
-                    </button>
-                </div>
+                
+                <!-- Flèches de navigation -->
+                <button class="hidden md:block absolute -left-16 top-1/2 -translate-y-1/2 bg-[#D88F42] text-white rounded-full w-12 h-12 flex items-center justify-center hover:bg-[#0C4069] transition-colors">
+                    <i class="fas fa-arrow-left"></i>
+                </button>
+                <button class="hidden md:block absolute -right-16 top-1/2 -translate-y-1/2 bg-[#D88F42] text-white rounded-full w-12 h-12 flex items-center justify-center hover:bg-[#0C4069] transition-colors">
+                    <i class="fas fa-arrow-right"></i>
+                </button>
             </div>
-        
-    </div>
+        </div>
     </section>
 
+    
+<section class="py-16 bg-gray-50">
+    <div class="container mx-auto px-4">
+        <div class="max-w-4xl mx-auto">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-[#0C4069] mb-4 flex items-center justify-center">
+                    <i class="fas fa-question-circle text-[#D88F42] mr-3"></i>
+                    FAQ - Questions Fréquemment Posées
+                </h2>
+            </div>
 
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- FAQ Content -->
+                <div class="space-y-4">
+                    <!-- Question 1 -->
+                    <div class="bg-white rounded-lg shadow-sm overflow-hidden" x-data="{ open: false }">
+                        <button class="w-full px-6 py-4 text-left flex items-center justify-between hover:bg-gray-50" @click="open = !open">
+                            <span class="font-semibold text-[#0C4069]">Quels types de voyages proposez-vous ?</span>
+                            <i class="fas fa-plus text-[#D88F42] transform transition-transform" :class="{ 'rotate-45': open }"></i>
+                        </button>
+                        <div class="px-6 py-4 bg-gray-50 " x-show="open" x-collapse>
+                            <p class="text-gray-600 ">Nous proposons une large gamme de voyages : vols, hôtels, packages tout compris, circuits touristiques, et séjours sur mesure pour répondre à tous vos besoins.</p>
+                        </div>
+                    </div>
+
+                    <!-- Question 2 -->
+                    <div class="bg-white rounded-lg shadow-sm overflow-hidden" x-data="{ open: false }">
+                        <button class="w-full px-6 py-4 text-left flex items-center justify-between hover:bg-gray-50" @click="open = !open">
+                            <span class="font-semibold text-[#0C4069]">Comment puis-je modifier ou annuler ma réservation ?</span>
+                            <i class="fas fa-plus text-[#D88F42] transform transition-transform" :class="{ 'rotate-45': open }"></i>
+                        </button>
+                        <div class="px-6 py-4 bg-gray-50" x-show="open" x-collapse>
+                            <p class="text-gray-600">Connectez-vous à votre compte et accédez à la section "Mes réservations". Vous pourrez y gérer vos modifications ou annulations selon nos conditions générales.</p>
+                        </div>
+                    </div>
+
+                    <!-- Question 3 -->
+                    <div class="bg-white rounded-lg shadow-sm overflow-hidden" x-data="{ open: false }">
+                        <button class="w-full px-6 py-4 text-left flex items-center justify-between hover:bg-gray-50" @click="open = !open">
+                            <span class="font-semibold text-[#0C4069]">Puis-je réserver pour une autre personne ?</span>
+                            <i class="fas fa-plus text-[#D88F42] transform transition-transform" :class="{ 'rotate-45': open }"></i>
+                        </button>
+                        <div class="px-6 py-4 bg-gray-50" x-show="open" x-collapse>
+                            <p class="text-gray-600">Oui, vous pouvez réserver pour d'autres personnes. Assurez-vous simplement de fournir les informations correctes des voyageurs lors de la réservation.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Image Column -->
+                <div class="hidden md:block">
+                    <img src="{{ asset('build/assets/image/imgfqa.jpg') }}" alt="Support Client" class="rounded-lg shadow-lg w-full h-auto object-cover">
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+    
+<footer class="bg-gray-900 text-white relative overflow-hidden">
+        <!-- Fond texturé -->
+        <div class="absolute inset-0 bg-footer-texture bg-cover opacity-10"></div>
+        
+        <div class="relative z-10 pt-16 pb-12 px-4 sm:px-6 lg:px-8">
+            <div class="max-w-7xl mx-auto">
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-10">
+                    <!-- Logo et description -->
+                    <div class="md:col-span-2">
+                        <div class="flex items-center mb-6">
+                            <img src="{{ asset('build/assets/image/logo_blanc.png') }}" alt="Logo" class="h-24 w-auto">
+               
+                     </div>
+                        <p class="text-gray-300 text-lg leading-relaxed mb-6">
+                            Votre partenaire de confiance pour réserver vos voyages en toute sécurité et simplicité, où que vous soyez.
+                        </p>
+                        <div class="flex space-x-4">
+                            <a href="#" class="bg-akm-orange text-white p-3 rounded-full hover:bg-white hover:text-akm-orange transition-all duration-300">
+                                <i class="fab fa-facebook-f"></i>
+                            </a>
+                            <a href="#" class="bg-akm-orange text-white p-3 rounded-full hover:bg-white hover:text-akm-orange transition-all duration-300">
+                                <i class="fab fa-twitter"></i>
+                            </a>
+                            <a href="#" class="bg-akm-orange text-white p-3 rounded-full hover:bg-white hover:text-akm-orange transition-all duration-300">
+                                <i class="fab fa-instagram"></i>
+                            </a>
+                            <a href="#" class="bg-akm-orange text-white p-3 rounded-full hover:bg-white hover:text-akm-orange transition-all duration-300">
+                                <i class="fab fa-linkedin-in"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Navigation -->
+                    <div>
+                        <h2 class="text-xl font-bold text-akm-orange mb-6 relative pb-2 after:content-[''] after:absolute after:left-0 after:bottom-0 after:w-16 after:h-1 after:bg-akm-orange">
+                            Navigation
+                        </h2>
+                        <ul class="space-y-3">
+                            <li><a href="#" class="text-gray-300 hover:text-white hover:pl-2 transition-all duration-300 flex items-center">
+                                <i class="fas fa-chevron-right text-akm-orange mr-2 text-xs"></i> Accueil</a></li>
+                            <li><a href="#" class="text-gray-300 hover:text-white hover:pl-2 transition-all duration-300 flex items-center">
+                                <i class="fas fa-chevron-right text-akm-orange mr-2 text-xs"></i> Destinations</a></li>
+                            <li><a href="#" class="text-gray-300 hover:text-white hover:pl-2 transition-all duration-300 flex items-center">
+                                <i class="fas fa-chevron-right text-akm-orange mr-2 text-xs"></i> Promotions</a></li>
+                            <li><a href="#" class="text-gray-300 hover:text-white hover:pl-2 transition-all duration-300 flex items-center">
+                                <i class="fas fa-chevron-right text-akm-orange mr-2 text-xs"></i> FAQ</a></li>
+                            <li><a href="#" class="text-gray-300 hover:text-white hover:pl-2 transition-all duration-300 flex items-center">
+                                <i class="fas fa-chevron-right text-akm-orange mr-2 text-xs"></i> Conditions générales</a></li>
+                            <li><a href="#" class="text-gray-300 hover:text-white hover:pl-2 transition-all duration-300 flex items-center">
+                                <i class="fas fa-chevron-right text-akm-orange mr-2 text-xs"></i> Politique de confidentialité</a></li>
+                        </ul>
+                    </div>
+
+                    <!-- Contact -->
+                    <div>
+                        <h2 class="text-xl font-bold text-akm-orange mb-6 relative pb-2 after:content-[''] after:absolute after:left-0 after:bottom-0 after:w-16 after:h-1 after:bg-akm-orange">
+                            Nous contacter
+                        </h2>
+                        <ul class="space-y-4">
+                            <li class="flex items-start">
+                                <div class="bg-akm-orange/10 p-2 rounded-full mr-4">
+                                    <svg class="w-5 h-5 text-akm-orange" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <p class="text-gray-300 font-medium">Téléphone</p>
+                                    <p class="text-white">+237 668 99 99 46</p>
+                                </div>
+                            </li>
+                            <li class="flex items-start">
+                                <div class="bg-akm-orange/10 p-2 rounded-full mr-4">
+                                    <svg class="w-5 h-5 text-akm-orange" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <p class="text-gray-300 font-medium">Email</p>
+                                    <p class="text-white">Mahamatkonto24@gmail.com</p>
+                                </div>
+                            </li>
+                            <li class="flex items-start">
+                                <div class="bg-akm-orange/10 p-2 rounded-full mr-4">
+                                    <svg class="w-5 h-5 text-akm-orange" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <p class="text-gray-300 font-medium">Adresse</p>
+                                    <p class="text-white">Douala - Cameroun</p>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Copyright et paiement -->
+                <div class="border-t border-gray-800 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
+                    <p class="text-gray-400 mb-4 md:mb-0">© 2025 AKM Voyage. Tous droits réservés.</p>
+                    <div class="flex space-x-4">
+                        <img src="https://via.placeholder.com/40x25?text=VISA" alt="Visa" class="h-8 w-auto opacity-80 hover:opacity-100 transition">
+                        <img src="https://via.placeholder.com/40x25?text=MC" alt="Mastercard" class="h-8 w-auto opacity-80 hover:opacity-100 transition">
+                        <img src="https://via.placeholder.com/40x25?text=PP" alt="PayPal" class="h-8 w-auto opacity-80 hover:opacity-100 transition">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+   
     <script>
-       // le menu
-       document.getElementById('menu-toggle').addEventListener('click', function() {
-            const menu = document.getElementById('mobile-menu');
-            menu.classList.toggle('hidden');
-        });
-        // effet akm
-        const text = "AKM VOYAGE";
-    let index = 0;
-    let isDeleting = false;
-    const typingSpeed = 300; // Vitesse d'écriture
-    const deletingSpeed = 150; // Vitesse de suppression
-    const pauseBetween = 1000; // Pause entre écrire/supprimer
+        // le menu
+        document.getElementById('menu-toggle').addEventListener('click', function() {
+                const menu = document.getElementById('mobile-menu');
+                menu.classList.toggle('hidden');
+            });
+            // effet akm
+            const text = "AKM VOYAGE";
+        let index = 0;
+        let isDeleting = false;
+        const typingSpeed = 300; // Vitesse d'écriture
+        const deletingSpeed = 150; // Vitesse de suppression
+        const pauseBetween = 1000; // Pause entre écrire/supprimer
 
-    function typeWriter() {
-        const typingElement = document.getElementById("typing-text");
+        function typeWriter() {
+            const typingElement = document.getElementById("typing-text");
 
-        if (!isDeleting) {
-            typingElement.innerText = text.slice(0, index);
-            index++;
+            if (!isDeleting) {
+                typingElement.innerText = text.slice(0, index);
+                index++;
 
-            if (index > text.length) {
-                // Quand tout est écrit, attendre et commencer à supprimer
-                setTimeout(() => {
-                    isDeleting = true;
-                    typeWriter();
-                }, pauseBetween);
-                return;
+                if (index > text.length) {
+                    // Quand tout est écrit, attendre et commencer à supprimer
+                    setTimeout(() => {
+                        isDeleting = true;
+                        typeWriter();
+                    }, pauseBetween);
+                    return;
+                }
+            } else {
+                typingElement.innerText = text.slice(0, index);
+                index--;
+
+                if (index === 0) {
+                    // Quand tout est effacé, attendre et recommencer à écrire
+                    setTimeout(() => {
+                        isDeleting = false;
+                        typeWriter();
+                    }, pauseBetween);
+                    return;
+                }
             }
-        } else {
-            typingElement.innerText = text.slice(0, index);
-            index--;
 
-            if (index === 0) {
-                // Quand tout est effacé, attendre et recommencer à écrire
-                setTimeout(() => {
-                    isDeleting = false;
-                    typeWriter();
-                }, pauseBetween);
-                return;
-            }
+            setTimeout(typeWriter, isDeleting ? deletingSpeed : typingSpeed);
         }
 
-        setTimeout(typeWriter, isDeleting ? deletingSpeed : typingSpeed);
+        window.onload = typeWriter;
+        const testimonials = [
+        {
+            name: "Fatima D.",
+            location: "N'Djamena, Tchad",
+            quote: "Un service rapide, professionnel et très à l'écoute...",
+            image: "url_image1.jpg"
+        },
+        // Ajouter d'autres témoignages ici
+    ];
+    
+    let currentIndex = 0;
+    
+    function showTestimonial(index) {
+        // Implémentez la logique pour afficher le témoignage correspondant
     }
-
-    window.onload = typeWriter;
+    
+    // Écouteurs d'événements pour les flèches
+    document.querySelectorAll('.arrow-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            currentIndex = btn.classList.contains('prev') ? 
+                Math.max(0, currentIndex - 1) : 
+                Math.min(testimonials.length - 1, currentIndex + 1);
+            showTestimonial(currentIndex);
+        });
+    });
     </script>
 
 </body>
