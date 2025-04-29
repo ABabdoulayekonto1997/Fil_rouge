@@ -28,8 +28,8 @@
 </head>
 <body>
 
-    <header class="bg-white px-6 py-4 shadow-md">
-        <div class="container mx-auto ">
+    <header class="fixed top-0 left-0 right-0 bg-white px-1 py-4 shadow-md z-50">
+        <div class="container mx-auto">
             <div class="flex items-center">
                 <!-- Logo à gauche -->
                 <div class="mr-4">
@@ -70,34 +70,30 @@
     </header>
    <!--baniere  -->
 
-    <section class=" relative w-full h-[450px]  overflow-hidden">
-  <img src="{{ asset('build/assets/image/img_baniere.png') }}" alt="Bannière" class="absolute w-full h-full object-cover">
-
-  <div class="absolute inset-0 flex items-center justify-center px-6 py-4">
-    <div class="grid  grid-cols-[50%_45%] md:flex-row items-center  w-full max-w-6xl mx-auto text-white">
-
-      <!-- Texte à gauche -->
-      <div class="text-center md:text-left mb-8 md:mb-0">
-    <h1 class="text-4xl text-center md:text-5xl text-[#0C4069] animate-bounce font-bold mb-4">Trouvez, Réservez, Partez </h1>
-    <p class="text-lg text-center text-black md:text-2xl">Réservez vos voyages et activités en quelques <br>clics, où que vous soyez. Simplifiez vos <br>réservations avec </p>
-    <div class="text-center md:text-left mb-8 md:mb-0">
-        </h1><h1 id="typing-text" class="text-2xl text-center md:text-5xl text-[#D88F42] font-bold mb-4"></h1>
-    </div>
-    <a href="#">
-        <div class="text-center bg-[#D88F42] hover:bg-[#0C4069] rounded-lg w-64 transition mx-auto mt-4">
-            <b>Réservez maintenant</b>
+    <section class="px-1 py-4 relative w-full h-[450px]  overflow-hidden">
+        <img src="{{ asset('build/assets/image/img_baniere.png') }}" alt="Bannière" class="absolute w-full h-full object-cover">
+        <div class="absolute inset-0 flex items-center justify-center px-6 py-4">
+            <div class="grid  grid-cols-[50%_45%] md:flex-row items-center  w-full max-w-6xl mx-auto text-white">
+                        <!-- Texte à gauche -->
+                <div class="text-center md:text-left mb-8 md:mb-0">
+                    <h1 class="text-4xl text-center md:text-5xl text-[#0C4069] animate-bounce font-bold mb-4">Trouvez, Réservez, Partez </h1>
+                    <p class="text-lg text-center text-black md:text-2xl">Réservez vos voyages et activités en quelques <br>clics, où que vous soyez. Simplifiez vos <br>réservations avec </p>
+                    <div class="text-center md:text-left mb-8 md:mb-0">
+                        </h1><h1 id="typing-text" class="text-2xl text-center md:text-5xl text-[#D88F42] font-bold mb-4"></h1>
+                    </div>
+                        <a href="#">
+                            <div class="text-center bg-[#D88F42] hover:bg-[#0C4069] rounded-lg w-64 transition mx-auto mt-4">
+                                    <b>Réservez maintenant</b>
+                            </div>
+                        </a>
+                </div>
+            <!-- Image à droite -->
+                <div class="">
+                    <img src="{{ asset('build/assets/image/imageBanierer.png') }}" alt="Logo" 
+                    class=" h-auto transform transition-transform duration-700 hover:-translate-x-32">
+                </div>
+            </div>
         </div>
-    </a>
-</div>
-
-      <!-- Image à droite -->
-      <div class="">
-        <img src="{{ asset('build/assets/image/imageBanierer.png') }}" alt="Logo" 
-        class=" h-auto transform transition-transform duration-700 hover:-translate-x-32">
-      </div>
-
-    </div>
-  </div>
     </section>
 
 <!--inout rehecher  -->
@@ -478,116 +474,115 @@
     </div>
 </section>
     
-<footer class="bg-gray-900 text-white relative overflow-hidden">
-        <!-- Fond texturé -->
-        <div class="absolute inset-0 bg-footer-texture bg-cover opacity-10"></div>
-        
-        <div class="relative z-10 pt-16 pb-12 px-4 sm:px-6 lg:px-8">
-            <div class="max-w-7xl mx-auto">
-                <div class="grid grid-cols-1 md:grid-cols-4 gap-10">
-                    <!-- Logo et description -->
-                    <div class="md:col-span-2">
-                        <div class="flex items-center mb-6">
-                            <img src="{{ asset('build/assets/image/logo_blanc.png') }}" alt="Logo" class="h-24 w-auto">
-               
-                     </div>
-                        <p class="text-gray-300 text-lg leading-relaxed mb-6">
-                            Votre partenaire de confiance pour réserver vos voyages en toute sécurité et simplicité, où que vous soyez.
-                        </p>
-                        <div class="flex space-x-4">
-                            <a href="#" class="bg-akm-orange text-white p-3 rounded-full hover:bg-white hover:text-akm-orange transition-all duration-300">
-                                <i class="fab fa-facebook-f"></i>
-                            </a>
-                            <a href="#" class="bg-akm-orange text-white p-3 rounded-full hover:bg-white hover:text-akm-orange transition-all duration-300">
-                                <i class="fab fa-twitter"></i>
-                            </a>
-                            <a href="#" class="bg-akm-orange text-white p-3 rounded-full hover:bg-white hover:text-akm-orange transition-all duration-300">
-                                <i class="fab fa-instagram"></i>
-                            </a>
-                            <a href="#" class="bg-akm-orange text-white p-3 rounded-full hover:bg-white hover:text-akm-orange transition-all duration-300">
-                                <i class="fab fa-linkedin-in"></i>
-                            </a>
+    <footer class=" bg-gray-900 text-white relative overflow-hidden">
+            <!-- Fond texturé -->
+            <div class=" absolute inset-0 bg-footer-texture bg-cover opacity-10"></div>
+            
+            <div class="relative z-10 pt-16 pb-12 px-4 sm:px-6 lg:px-8">
+                <div class="max-w-7xl mx-auto">
+                    <div class="grid grid-cols-1 md:grid-cols-4 gap-10">
+                        <!-- Logo et description -->
+                        <div class="md:col-span-2">
+                            <div class="flex items-center mb-6">
+                                <img src="{{ asset('build/assets/image/logo_blanc.png') }}" alt="Logo" class="h-24 w-auto">
+                
+                        </div>
+                            <p class="text-gray-300 text-lg leading-relaxed mb-6">
+                                Votre partenaire de confiance pour réserver vos voyages en toute sécurité et simplicité, où que vous soyez.
+                            </p>
+                            <div class="flex space-x-4">
+                                <a href="#" class="bg-akm-orange text-white p-3 rounded-full hover:bg-white hover:text-akm-orange transition-all duration-300">
+                                    <i class="fab fa-facebook-f"></i>
+                                </a>
+                                <a href="#" class="bg-akm-orange text-white p-3 rounded-full hover:bg-white hover:text-akm-orange transition-all duration-300">
+                                    <i class="fab fa-twitter"></i>
+                                </a>
+                                <a href="#" class="bg-akm-orange text-white p-3 rounded-full hover:bg-white hover:text-akm-orange transition-all duration-300">
+                                    <i class="fab fa-instagram"></i>
+                                </a>
+                                <a href="#" class="bg-akm-orange text-white p-3 rounded-full hover:bg-white hover:text-akm-orange transition-all duration-300">
+                                    <i class="fab fa-linkedin-in"></i>
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- Navigation -->
+                        <div>
+                            <h2 class="text-xl font-bold text-akm-orange mb-6 relative pb-2 after:content-[''] after:absolute after:left-0 after:bottom-0 after:w-16 after:h-1 after:bg-akm-orange">
+                                Navigation
+                            </h2>
+                            <ul class="space-y-3">
+                                <li><a href="#" class="text-gray-300 hover:text-white hover:pl-2 transition-all duration-300 flex items-center">
+                                    <i class="fas fa-chevron-right text-akm-orange mr-2 text-xs"></i> Accueil</a></li>
+                                <li><a href="#" class="text-gray-300 hover:text-white hover:pl-2 transition-all duration-300 flex items-center">
+                                    <i class="fas fa-chevron-right text-akm-orange mr-2 text-xs"></i> Destinations</a></li>
+                                <li><a href="#" class="text-gray-300 hover:text-white hover:pl-2 transition-all duration-300 flex items-center">
+                                    <i class="fas fa-chevron-right text-akm-orange mr-2 text-xs"></i> Promotions</a></li>
+                                <li><a href="#" class="text-gray-300 hover:text-white hover:pl-2 transition-all duration-300 flex items-center">
+                                    <i class="fas fa-chevron-right text-akm-orange mr-2 text-xs"></i> FAQ</a></li>
+                                <li><a href="#" class="text-gray-300 hover:text-white hover:pl-2 transition-all duration-300 flex items-center">
+                                    <i class="fas fa-chevron-right text-akm-orange mr-2 text-xs"></i> Conditions générales</a></li>
+                                <li><a href="#" class="text-gray-300 hover:text-white hover:pl-2 transition-all duration-300 flex items-center">
+                                    <i class="fas fa-chevron-right text-akm-orange mr-2 text-xs"></i> Politique de confidentialité</a></li>
+                            </ul>
+                        </div>
+
+                        <!-- Contact -->
+                        <div>
+                            <h2 class="text-xl font-bold text-akm-orange mb-6 relative pb-2 after:content-[''] after:absolute after:left-0 after:bottom-0 after:w-16 after:h-1 after:bg-akm-orange">
+                                Nous contacter
+                            </h2>
+                            <ul class="space-y-4">
+                                <li class="flex items-start">
+                                    <div class="bg-akm-orange/10 p-2 rounded-full mr-4">
+                                        <svg class="w-5 h-5 text-akm-orange" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path>
+                                        </svg>
+                                    </div>
+                                    <div>
+                                        <p class="text-gray-300 font-medium">Téléphone</p>
+                                        <p class="text-white">+237 668 99 99 46</p>
+                                    </div>
+                                </li>
+                                <li class="flex items-start">
+                                    <div class="bg-akm-orange/10 p-2 rounded-full mr-4">
+                                        <svg class="w-5 h-5 text-akm-orange" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                                        </svg>
+                                    </div>
+                                    <div>
+                                        <p class="text-gray-300 font-medium">Email</p>
+                                        <p class="text-white">Mahamatkonto24@gmail.com</p>
+                                    </div>
+                                </li>
+                                <li class="flex items-start">
+                                    <div class="bg-akm-orange/10 p-2 rounded-full mr-4">
+                                        <svg class="w-5 h-5 text-akm-orange" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                        </svg>
+                                    </div>
+                                    <div>
+                                        <p class="text-gray-300 font-medium">Adresse</p>
+                                        <p class="text-white">Douala - Cameroun</p>
+                                    </div>
+                                </li>
+                            </ul>
                         </div>
                     </div>
 
-                    <!-- Navigation -->
-                    <div>
-                        <h2 class="text-xl font-bold text-akm-orange mb-6 relative pb-2 after:content-[''] after:absolute after:left-0 after:bottom-0 after:w-16 after:h-1 after:bg-akm-orange">
-                            Navigation
-                        </h2>
-                        <ul class="space-y-3">
-                            <li><a href="#" class="text-gray-300 hover:text-white hover:pl-2 transition-all duration-300 flex items-center">
-                                <i class="fas fa-chevron-right text-akm-orange mr-2 text-xs"></i> Accueil</a></li>
-                            <li><a href="#" class="text-gray-300 hover:text-white hover:pl-2 transition-all duration-300 flex items-center">
-                                <i class="fas fa-chevron-right text-akm-orange mr-2 text-xs"></i> Destinations</a></li>
-                            <li><a href="#" class="text-gray-300 hover:text-white hover:pl-2 transition-all duration-300 flex items-center">
-                                <i class="fas fa-chevron-right text-akm-orange mr-2 text-xs"></i> Promotions</a></li>
-                            <li><a href="#" class="text-gray-300 hover:text-white hover:pl-2 transition-all duration-300 flex items-center">
-                                <i class="fas fa-chevron-right text-akm-orange mr-2 text-xs"></i> FAQ</a></li>
-                            <li><a href="#" class="text-gray-300 hover:text-white hover:pl-2 transition-all duration-300 flex items-center">
-                                <i class="fas fa-chevron-right text-akm-orange mr-2 text-xs"></i> Conditions générales</a></li>
-                            <li><a href="#" class="text-gray-300 hover:text-white hover:pl-2 transition-all duration-300 flex items-center">
-                                <i class="fas fa-chevron-right text-akm-orange mr-2 text-xs"></i> Politique de confidentialité</a></li>
-                        </ul>
-                    </div>
-
-                    <!-- Contact -->
-                    <div>
-                        <h2 class="text-xl font-bold text-akm-orange mb-6 relative pb-2 after:content-[''] after:absolute after:left-0 after:bottom-0 after:w-16 after:h-1 after:bg-akm-orange">
-                            Nous contacter
-                        </h2>
-                        <ul class="space-y-4">
-                            <li class="flex items-start">
-                                <div class="bg-akm-orange/10 p-2 rounded-full mr-4">
-                                    <svg class="w-5 h-5 text-akm-orange" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path>
-                                    </svg>
-                                </div>
-                                <div>
-                                    <p class="text-gray-300 font-medium">Téléphone</p>
-                                    <p class="text-white">+237 668 99 99 46</p>
-                                </div>
-                            </li>
-                            <li class="flex items-start">
-                                <div class="bg-akm-orange/10 p-2 rounded-full mr-4">
-                                    <svg class="w-5 h-5 text-akm-orange" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
-                                    </svg>
-                                </div>
-                                <div>
-                                    <p class="text-gray-300 font-medium">Email</p>
-                                    <p class="text-white">Mahamatkonto24@gmail.com</p>
-                                </div>
-                            </li>
-                            <li class="flex items-start">
-                                <div class="bg-akm-orange/10 p-2 rounded-full mr-4">
-                                    <svg class="w-5 h-5 text-akm-orange" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
-                                    </svg>
-                                </div>
-                                <div>
-                                    <p class="text-gray-300 font-medium">Adresse</p>
-                                    <p class="text-white">Douala - Cameroun</p>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-
-                <!-- Copyright et paiement -->
-                <div class="border-t border-gray-800 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
-                    <p class="text-gray-400 mb-4 md:mb-0">© 2025 AKM Voyage. Tous droits réservés.</p>
-                    <div class="flex space-x-4">
-                        <img src="https://via.placeholder.com/40x25?text=VISA" alt="Visa" class="h-8 w-auto opacity-80 hover:opacity-100 transition">
-                        <img src="https://via.placeholder.com/40x25?text=MC" alt="Mastercard" class="h-8 w-auto opacity-80 hover:opacity-100 transition">
-                        <img src="https://via.placeholder.com/40x25?text=PP" alt="PayPal" class="h-8 w-auto opacity-80 hover:opacity-100 transition">
+                    <!-- Copyright et paiement -->
+                    <div class="border-t border-gray-800 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
+                        <p class="text-gray-400 mb-4 md:mb-0">© 2025 AKM Voyage. Tous droits réservés.</p>
+                        <div class="flex space-x-4">
+                            <img src="https://via.placeholder.com/40x25?text=VISA" alt="Visa" class="h-8 w-auto opacity-80 hover:opacity-100 transition">
+                            <img src="https://via.placeholder.com/40x25?text=MC" alt="Mastercard" class="h-8 w-auto opacity-80 hover:opacity-100 transition">
+                            <img src="https://via.placeholder.com/40x25?text=PP" alt="PayPal" class="h-8 w-auto opacity-80 hover:opacity-100 transition">
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
     </footer>
-   
     <script>
         // le menu
         document.getElementById('menu-toggle').addEventListener('click', function() {
@@ -643,23 +638,23 @@
             image: "url_image1.jpg"
         },
         // Ajouter d'autres témoignages ici
-    ];
-    
-    let currentIndex = 0;
-    
-    function showTestimonial(index) {
-        // Implémentez la logique pour afficher le témoignage correspondant
-    }
-    
-    // Écouteurs d'événements pour les flèches
-    document.querySelectorAll('.arrow-btn').forEach(btn => {
-        btn.addEventListener('click', () => {
-            currentIndex = btn.classList.contains('prev') ? 
-                Math.max(0, currentIndex - 1) : 
-                Math.min(testimonials.length - 1, currentIndex + 1);
-            showTestimonial(currentIndex);
+        ];
+        
+        let currentIndex = 0;
+        
+        function showTestimonial(index) {
+            // Implémentez la logique pour afficher le témoignage correspondant
+        }
+        
+        // Écouteurs d'événements pour les flèches
+        document.querySelectorAll('.arrow-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                currentIndex = btn.classList.contains('prev') ? 
+                    Math.max(0, currentIndex - 1) : 
+                    Math.min(testimonials.length - 1, currentIndex + 1);
+                showTestimonial(currentIndex);
+            });
         });
-    });
     </script>
 
 </body>
