@@ -5,6 +5,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::view('/','Accueil' );
 Route::view('/contact','contact');
+Route::view('/Apropos','Apropos');
+Route::view('/destinations','destinations');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
