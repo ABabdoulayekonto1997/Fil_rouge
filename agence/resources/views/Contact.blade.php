@@ -19,8 +19,49 @@
     </script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
 </head>
+
 <body class="bg-gray-50">
-    <!-- Hero Section -->
+<header class="fixed top-0 left-0 right-0 bg-white px-1 py-4 shadow-md z-50">
+        <div class="container mx-auto">
+            <div class="flex items-center">
+                <!-- Logo à gauche -->
+                <div class="mr-4">
+                    <img src="{{ asset('build/assets/image/logo.png') }}" alt="Logo" class="h-12 w-auto">
+                </div>
+                <!-- Menu Desktop Centré -->
+                <nav class="hidden md:flex flex-grow justify-center space-x-4">
+                    <a href="{{ url('/') }}" class="text-[#0C4069] "> <div class="text-center rounded-full w-24 bg-[#E7ECF0] hover:bg-[#D88F42] hover:text-white">Accueil</div></a>
+                    <a href="{{ url('/destinations') }}" class="text-[#0C4069] "> <div class="text-center rounded-full w-24 bg-[#E7ECF0] hover:bg-[#D88F42] hover:text-white">Destination</div></a>
+                    <a href="{{ url('/Apropos') }}" class="text-[#0C4069] "> <div class="text-center rounded-full w-24 bg-[#E7ECF0] hover:bg-[#D88F42] hover:text-white">A propos</div></a>
+                    <a href="{{ url('/contact') }}" class="text-[#0C4069] ">  <div class="text-center rounded-full w-24 bg-[#E7ECF0] hover:bg-[#D88F42] hover:text-white">Contact</div></a>
+                </nav>
+                <!-- Boutons à droite -->
+                <div class="hidden md:flex items-center space-x-6">
+                    <a href="#" class="text-[#D88F42] hover:text-[#0C4069] transition px-4 py-2">Inscription</a>
+                    <a href="#" class="bg-[#D88F42] hover:bg-[#0C4069] text-white rounded-lg px-6 py-2 transition">
+                        <b>Se connecter</b>
+                    </a>
+                </div>
+                
+                <!-- Bouton Mobile -->
+                <button class="md:hidden ml-auto text-gray-700 focus:outline-none" id="menu-toggle">
+                    <i class="fas fa-bars text-2xl"></i>
+                </button>
+            </div>
+            
+            <!-- Menu Mobile -->
+            <div class="md:hidden hidden mt-4 py-2 border-t" id="mobile-menu">
+                <a href="#" class="block py-2 text-gray-700 hover:text-blue-600">Accueil</a>
+                <a href="#" class="block py-2 text-gray-700 hover:text-blue-600">Destinations</a>
+                <a href="#" class="block py-2 text-gray-700 hover:text-blue-600">A propos</a>
+                <a href="#" class="block py-2 text-gray-700 hover:text-blue-600">Contact</a>
+                <a href="#" class="block py-2 text-gray-700 hover:text-blue-600">Inscription</a>
+                <a href="#" class="block py-2 text-gray-700 hover:text-blue-600">Se connecter</a>
+            </div>
+        </div>
+    </header>
+
+<!-- Hero Section -->
     <section class="relative h-[400px] overflow-hidden">
         <!-- Background Image -->
         <div class="absolute inset-0">
