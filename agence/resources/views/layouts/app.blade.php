@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
-
+        <script src="https://cdn.tailwindcss.com"></script>
         <title>{{ config('app.name', 'Laravel') }}</title>
 
         <!-- Fonts -->
@@ -14,21 +14,37 @@
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
-    <body class="font-sans antialiased">
-        <div class="min-h-screen bg-gray-100">
-            @include('layouts.navigation')
+    <body class="bg-[#0C4069] font-sans antialiased">
+        <div class="min-h-screen ">
+        
 
             <!-- Page Heading -->
             @isset($header)
-                <header class="bg-white shadow">
-                    <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-                        {{ $header }}
+                
+            <header class=" py-4 px-6">
+                  <div class="flex justify-between items-center max-w-7xl mx-auto">
+            <!-- Logo à gauche -->
+            <div class=" flex items-center">
+            <img src="{{ asset('build/assets/image/logo_blanc.png') }}" alt="Logo" class="h-12 w-auto">
+                
+            </div>
+            
+            <!-- Nom utilisateur à droite -->
+            <div class="flex items-center space-x-4">
+                <div class="space-x-4 flex items-center">
+                    <span class="ml-2 font-medium text-white">{{ Auth::user()->name }}</span>
+                    <div class="h-8 w-8 rounded-full bg-blue-100 flex items-center justify-center">
+                        <span class="text-blue-600 font-medium">{{ strtoupper(substr(Auth::user()->name, 0, 1)) }}</span>
                     </div>
-                </header>
+                </div>
+            </div>
+        </div>
+            </header>
+                    
             @endisset
 
             <!-- Page Content -->
-            <main>
+            <main class=" bg-[#0C4069]">
                 {{ $slot }}
             </main>
         </div>
