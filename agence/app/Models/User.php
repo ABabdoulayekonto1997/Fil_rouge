@@ -1,15 +1,12 @@
 <?php
-
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
-    /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, Notifiable;
 
     /**
@@ -21,6 +18,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'role',  // Ajout du champ role
     ];
 
     /**
@@ -44,5 +42,29 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    /**
+     * Relation: Un utilisateur peut avoir plusieurs réservations.
+     */
+    public function reservations()
+    {
+        return $this->hasMany(Reservation::class);
+    }
+
+    /**
+     * Relation: Un utilisateur peut avoir plusieurs notifications.
+     */
+    public function notifications()
+    {
+        return $this->hasMany(Notification::class);
+    }
+
+    /**
+     * Relation: Un utilisateur peut avoir plusieurs paiements via les réservations.
+     */
+    public function paiements()
+    {
+        return $this->hasManyThrough(Paiement::class, Reservation::class);
     }
 }
