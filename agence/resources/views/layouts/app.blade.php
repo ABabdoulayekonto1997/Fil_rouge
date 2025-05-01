@@ -20,7 +20,6 @@
 
             <!-- Page Heading -->
             @isset($header)
-                
             <header class=" py-4 px-6">
                   <div class="flex justify-between items-center max-w-7xl mx-auto">
             <!-- Logo à gauche -->
@@ -28,7 +27,7 @@
             <img src="{{ asset('build/assets/image/logo_blanc.png') }}" alt="Logo" class="h-12 w-auto">
                 
             </div>
-            
+            <h1 class="text-2xl text-white">Tableau de bord user</h1>
             <!-- Nom utilisateur à droite -->
             <div class="flex items-center space-x-4">
                 <div class="space-x-4 flex items-center">
@@ -40,7 +39,27 @@
             </div>
         </div>
             </header>
-                    
+            @endisset
+            @isset($adminheader)
+            <header class=" py-4 px-6">
+                  <div class="flex justify-between items-center max-w-7xl mx-auto">
+            <!-- Logo à gauche -->
+            <div class=" flex items-center">
+            <img src="{{ asset('build/assets/image/logo_blanc.png') }}" alt="Logo" class="h-12 w-auto">
+                
+            </div>
+            <h1 class="text-2xl text-white">Tableau de bord administrateur</h1>
+            <!-- Nom utilisateur à droite -->
+            <div class="flex items-center space-x-4">
+                <div class="space-x-4 flex items-center">
+                    <span class="ml-2 font-medium text-white">{{ Auth::user()->name }}</span>
+                    <div class="h-8 w-8 rounded-full bg-blue-100 flex items-center justify-center">
+                        <span class="text-blue-600 font-medium">{{ strtoupper(substr(Auth::user()->name, 0, 1)) }}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+            </header>
             @endisset
 
             <!-- Page Content -->

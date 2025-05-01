@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
+
 
 Route::view('/','Accueil' );
 Route::view('/contact','contact');
@@ -9,9 +11,14 @@ Route::view('/Apropos','Apropos');
 Route::view('/destinations','destinations');
 
 Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+    $user = Auth::user();
 
+    if ($user->role === 'admin') {
+        return view('dashboard'); // admin
+    } else {
+        return view('dashboardUser'); // utilisateur
+    }
+})->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
