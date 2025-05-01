@@ -17,7 +17,7 @@
                     </a>
                 </li>
 
-                <!-- Réservation -->
+                <!-- Réservations -->
                 <li>
                     <a href="" class="flex items-center p-3 rounded-lg hover:bg-white hover:bg-opacity-20 transition-all duration-300 group">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3 group-hover:scale-110 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
