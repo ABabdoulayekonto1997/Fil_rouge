@@ -13,13 +13,12 @@ return new class extends Migration
     {
         Schema::create('paiements', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('reservation_id');
+            $table->foreignId('reservation_id')->constrained('reservations')->onDelete('cascade'); // Utilise la méthode `foreignId()->constrained()`
             $table->decimal('montant', 10, 2);
             $table->enum('methode', ['Stripe', 'PayPal', 'MobileMoney']);
             $table->enum('statut', ['effectue', 'echoue', 'en_attente'])->default('en_attente');
             $table->timestamp('date_paiement')->useCurrent();
-            
-            $table->foreign('reservation_id')->references('id')->on('reservations')->onDelete('cascade');
+            $table->timestamps();
         });
     }
 

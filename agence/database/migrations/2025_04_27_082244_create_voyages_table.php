@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('voyages', function (Blueprint $table) {
             $table->id();
+            $table->string('image'); // Remplace 'titre' par le chemin de l'image
             $table->string('destination');
             $table->text('description')->nullable();
             $table->decimal('prix', 10, 2);

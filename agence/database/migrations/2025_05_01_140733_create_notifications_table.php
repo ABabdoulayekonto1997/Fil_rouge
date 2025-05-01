@@ -13,13 +13,11 @@ return new class extends Migration
     {
         Schema::create('notifications', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('utilisateur_id');
+            $table->foreignId('utilisateur_id')->constrained('users')->onDelete('cascade')->index();
             $table->text('message');
             $table->enum('type', ['confirmation', 'rappel', 'annulation']);
             $table->boolean('lu')->default(false);
-            $table->timestamp('date')->useCurrent();
-            
-            $table->foreign('utilisateur_id')->references('id')->on('users')->onDelete('cascade');
+            $table->timestamp('created_at')->useCurrent(); // Cohérent avec Eloquent
         });
     }
 
