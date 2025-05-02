@@ -28,4 +28,23 @@ class UserController extends Controller
         $user->delete();
         return redirect()->route('users.index')->with('success', 'Utilisateur supprimé avec succès');
     }
+
+    public function update(Request $request)
+    {
+        $request->validate([
+            'user_id' => 'required|exists:users,id',
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|unique:users,email,' . $request->user_id,
+            'role' => 'required|in:admin,user',
+        ]);
+    
+        $user = User::find($request->user_id);
+        $user->update([
+            'name' => $request->name,
+            'email' => $request->email,
+            'role' => $request->role,
+        ]);
+    
+        return redirect()->back()->with('success', 'Utilisateur mis à jour avec succès');
+    }
 }
