@@ -90,12 +90,9 @@
                             Rechercher
                         </button>
                     </div>
-                    <button class="px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 flex items-center">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
-                        </svg>
-                        Ajouter un utilisateur
-                    </button>
+                    <a href="{{ route('users.create') }}" class="bg-[#D88F42] hover:bg-[#0C4069] text-white font-bold py-2 px-4 rounded">
+    Ajouter un utilisateur
+</a>
                 </div>
 
                 <!-- Users Table -->
@@ -193,11 +190,13 @@
                             const userId = document.getElementById('userId').value;
                             const formData = new FormData(this);
 
+                            // Modifiez la partie fetch de votre script JavaScript comme ceci :
                             fetch(`/users/${userId}`, {
                                 method: 'POST',
                                 body: formData,
                                 headers: {
-                                    'X-Requested-With': 'XMLHttpRequest'
+                                    'X-Requested-With': 'XMLHttpRequest',
+                                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
                                 }
                             })
                             .then(response => response.json())

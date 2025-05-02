@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Validation\Rule;
 
 class UserController extends Controller
 {
@@ -31,48 +30,47 @@ class UserController extends Controller
         return redirect()->route('users.index')->with('success', 'Utilisateur supprimé avec succès');
     }
 
+    public function store(Request $request)
+    {
+        $validated = $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'password' => ['required', 'string', 'min:8'],
+            'role' => ['required', 'string', 'in:utilisateur,admin,super_admin'],
+            'is_active' => ['boolean']
+        ]);
+
+        $user = User::create([
+            'name' => $validated['name'],
+            'email' => $validated['email'],
+            'password' => Hash::make($validated['password']),
+            'role' => $validated['role'],
+            'is_active' => $validated['is_active'] ?? true
+        ]);
+
+        return redirect()->route('users.index')
+            ->with('success', 'Utilisateur créé avec succès');
+    }
+
     public function update(Request $request, User $user)
     {
-        try {
-            $validated = $request->validate([
-                'name' => ['required', 'string', 'max:255'],
-                'email' => ['required', 'email', Rule::unique('users')->ignore($user->id)],
-                'role' => ['required', Rule::in(['utilisateur', 'admin', 'super_admin'])],
-                'is_active' => ['sometimes', 'boolean'],
-                'password' => ['nullable', 'string', 'min:8', 'confirmed'],
-            ]);
+        $validated = $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email,' . $user->id],
+            'role' => ['required', 'string', 'in:utilisateur,admin,super_admin'],
+            'is_active' => ['boolean']
+        ]);
 
-            $userData = [
-                'name' => $validated['name'],
-                'email' => $validated['email'],
-                'role' => $validated['role'],
-                'is_active' => $request->has('is_active'),
-            ];
+        $user->update([
+            'name' => $validated['name'],
+            'email' => $validated['email'],
+            'role' => $validated['role'],
+            'is_active' => $validated['is_active'] ?? false
+        ]);
 
-            if (!empty($validated['password'])) {
-                $userData['password'] = Hash::make($validated['password']);
-            }
-
-            $user->update($userData);
-
-            if ($request->ajax()) {
-                return response()->json([
-                    'success' => true,
-                    'message' => 'Utilisateur mis à jour avec succès'
-                ]);
-            }
-
-            return redirect()->route('users.index')
-                ->with('success', 'Utilisateur mis à jour avec succès');
-        } catch (\Exception $e) {
-            if ($request->ajax()) {
-                return response()->json([
-                    'success' => false,
-                    'message' => 'Une erreur est survenue lors de la mise à jour : ' . $e->getMessage()
-                ], 422);
-            }
-
-            return back()->withErrors(['error' => 'Une erreur est survenue lors de la mise à jour : ' . $e->getMessage()])->withInput();
-        }
+        return response()->json([
+            'success' => true,
+            'message' => 'Utilisateur modifié avec succès'
+        ]);
     }
 }
