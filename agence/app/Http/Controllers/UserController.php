@@ -9,7 +9,7 @@ class UserController extends Controller
 {
     public function index()
     {
-        $users = User::all();
+        $users = User::paginate(10); // This will return a paginator instance instead of a collection
         return view('dashboardGestionUser', compact('users'));
     }
 
