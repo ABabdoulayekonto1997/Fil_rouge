@@ -137,13 +137,81 @@
                                     </span>
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                                    <button class="text-blue-600 hover:text-blue-900 mr-3">Éditer</button>
+                                    <button onclick="openEditModal('{{ $user->id }}', '{{ $user->name }}', '{{ $user->email }}', '{{ $user->role }}')" class="text-blue-600 hover:text-blue-900 mr-3">Éditer</button>
                                     <button class="text-red-600 hover:text-red-900">Supprimer</button>
                                 </td>
                             </tr>
                             @endforeach
                         </tbody>
                     </table>
+
+                    <!-- Modal de modification -->
+                    <div id="editModal" class="fixed inset-0 bg-gray-600 bg-opacity-50 hidden overflow-y-auto h-full w-full">
+                        <div class="relative top-20 mx-auto p-5 border w-96 shadow-lg rounded-md bg-white">
+                            <div class="mt-3 text-center">
+                                <h3 class="text-lg leading-6 font-medium text-gray-900">Modifier l'utilisateur</h3>
+                                <form id="editForm" class="mt-4">
+                                    @csrf
+                                    @method('PUT')
+                                    <input type="hidden" id="userId" name="id">
+                                    <div class="mt-2">
+                                        <input type="text" id="userName" name="name" class="w-full px-3 py-2 border rounded-lg" placeholder="Nom">
+                                    </div>
+                                    <div class="mt-2">
+                                        <input type="email" id="userEmail" name="email" class="w-full px-3 py-2 border rounded-lg" placeholder="Email">
+                                    </div>
+                                    <div class="mt-2">
+                                        <select id="userRole" name="role" class="w-full px-3 py-2 border rounded-lg">
+                                            <option value="user">Utilisateur</option>
+                                            <option value="admin">Administrateur</option>
+                                        </select>
+                                    </div>
+                                    <div class="mt-4 flex justify-between">
+                                        <button type="button" onclick="closeEditModal()" class="px-4 py-2 bg-gray-300 text-gray-700 rounded-lg hover:bg-gray-400">Annuler</button>
+                                        <button type="submit" class="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600">Enregistrer</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                    <script>
+                        function openEditModal(id, name, email, role) {
+                            document.getElementById('userId').value = id;
+                            document.getElementById('userName').value = name;
+                            document.getElementById('userEmail').value = email;
+                            document.getElementById('userRole').value = role;
+                            document.getElementById('editModal').classList.remove('hidden');
+                        }
+
+                        function closeEditModal() {
+                            document.getElementById('editModal').classList.add('hidden');
+                        }
+
+                        document.getElementById('editForm').addEventListener('submit', function(e) {
+                            e.preventDefault();
+                            const userId = document.getElementById('userId').value;
+                            const formData = new FormData(this);
+
+                            fetch(`/users/${userId}`, {
+                                method: 'POST',
+                                body: formData,
+                                headers: {
+                                    'X-Requested-With': 'XMLHttpRequest'
+                                }
+                            })
+                            .then(response => response.json())
+                            .then(data => {
+                                if (data.success) {
+                                    closeEditModal();
+                                    window.location.reload();
+                                }
+                            })
+                            .catch(error => {
+                                console.error('Erreur:', error);
+                            });
+                        });
+                    </script>
 
                     <!-- Pagination -->
                     <div class="mt-4">
