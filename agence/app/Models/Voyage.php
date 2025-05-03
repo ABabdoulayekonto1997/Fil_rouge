@@ -8,7 +8,20 @@ class Voyage extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['image', 'destination', 'description', 'prix', 'date_depart'];
+    protected $fillable = [
+        'image',
+        'destination',
+        'ville_depart',
+        'description',
+        'prix',
+        'date_depart'
+    ];
+
+    // Accesseur pour formater le prix en FCFA
+    public function getPrixFormateAttribute()
+    {
+        return number_format((float)$this->prix, 0, ',', ' ') . ' FCFA';
+    }
 
     // Relations
     public function reservations()

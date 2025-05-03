@@ -36,7 +36,7 @@ class UserController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8'],
-            'role' => ['required', 'string', 'in:utilisateur,admin,super_admin'],
+            'role' => ['required', 'string', 'in:utilisateur,admin,super_admin'], // Correction ici
             'is_active' => ['boolean']
         ]);
 
@@ -54,23 +54,71 @@ class UserController extends Controller
 
     public function update(Request $request, User $user)
     {
-        $validated = $request->validate([
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email,' . $user->id],
-            'role' => ['required', 'string', 'in:utilisateur,admin,super_admin'],
-            'is_active' => ['boolean']
-        ]);
+        try {
+            $validated = $request->validate([
+                'name' => ['required', 'string', 'max:255'],
+                'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email,' . $user->id],
+                'role' => ['required', 'string', 'in:utilisateur,admin,super_admin'],
+                'is_active' => ['nullable', 'boolean']
+            ]);
 
-        $user->update([
-            'name' => $validated['name'],
-            'email' => $validated['email'],
-            'role' => $validated['role'],
-            'is_active' => $validated['is_active'] ?? false
-        ]);
+            $updateData = [
+                'name' => $validated['name'],
+                'email' => $validated['email'],
+                'role' => $validated['role']
+            ];
 
-        return response()->json([
-            'success' => true,
-            'message' => 'Utilisateur modifié avec succès'
-        ]);
+            if ($request->has('is_active')) {
+                $updateData['is_active'] = $request->boolean('is_active');
+            }
+
+            $user->update($updateData);
+
+            return response()->json([
+                'success' => true,
+                'message' => 'Utilisateur modifié avec succès'
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Erreur lors de la modification : ' . $e->getMessage()
+            ], 422);
+        }
+    }
+
+    public function search(Request $request)
+    {
+        try {
+            $term = $request->query('term');
+            
+            if (empty($term)) {
+                return response()->json([
+                    'success' => true,
+                    'users' => User::paginate(10)
+                ]);
+            }
+    
+            $users = User::where(function($query) use ($term) {
+                $query->where('name', 'LIKE', "%{$term}%")
+                      ->orWhere('email', 'LIKE', "%{$term}%")
+                      ->orWhere('role', 'LIKE', "%{$term}%");
+            })->get();
+    
+            return response()->json([
+                'success' => true,
+                'users' => $users
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Erreur lors de la recherche : ' . $e->getMessage()
+            ], 422);
+        }
+    }
+
+    public function show($id)
+    {
+        $user = User::findOrFail($id);
+        return view('users.show', compact('user'));  // Changed from 'user.show' to 'users.show'
     }
 }

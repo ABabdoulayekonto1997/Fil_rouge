@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('image'); // Remplace 'titre' par le chemin de l'image
             $table->string('destination');
+            $table->string('ville_depart'); // Nouveau champ ajouté
             $table->text('description')->nullable();
             $table->decimal('prix', 10, 2);
             $table->date('date_depart');

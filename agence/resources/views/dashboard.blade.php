@@ -26,6 +26,15 @@
                         <span class="group-hover:font-medium">Utilisateur</span>
                     </a>
                 </li>
+                <li>
+    <a href="{{ route('dashboardGestionVoyage') }}" class="flex items-center p-3 rounded-lg hover:bg-white hover:bg-opacity-20 transition-all duration-300 group">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3 group-hover:scale-110 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.5 4.5L3 12h3v8l4-1.5V12h3L10.5 4.5z" />
+        </svg>
+        <span class="group-hover:font-medium">Voyage</span>
+    </a>
+</li>
+
 
                 <!-- Historiques -->
                 <li>
@@ -119,7 +128,8 @@
                         </div>
                         <div>
                             <h3 class="text-gray-500 font-medium">Utilisateurs actifs</h3>
-                            <p class="text-3xl font-bold text-[#D88F42]">156</p>
+                            <p class="text-3xl font-bold text-[#D88F42]"><p class="text-3xl font-bold text-[#D88F42]">{{ App\Models\User::count() }}</p>
+                            </p>
                         </div>
                     </div>
                 </div>
