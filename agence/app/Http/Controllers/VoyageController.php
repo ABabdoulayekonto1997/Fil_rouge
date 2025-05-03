@@ -112,4 +112,14 @@ class VoyageController extends Controller
             ], 422);
         }
     }
+
+    public function edit($id) 
+    { 
+        try { 
+            $voyage = Voyage::findOrFail($id); 
+            return response()->json($voyage); 
+        } catch (\Exception $e) { 
+            return response()->json(['error' => 'Voyage non trouvé'], 404); 
+        } 
+    }
 }

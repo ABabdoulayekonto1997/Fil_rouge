@@ -1,3 +1,4 @@
+
 <x-app-layout>
     <x-slot name="adminheader" class="">
         <h2 class="font-semibold text-xl text-gray-800">
@@ -104,8 +105,14 @@
                                 <tbody class="bg-white divide-y divide-gray-200">
                                     @foreach($voyages as $voyage)
                                     <tr>
+                                        <!-- Dans le tableau -->
                                         <td class="px-6 py-4">
-                                            <img src="{{ Storage::url($voyage->image) }}" alt="{{ $voyage->destination }}" class="h-20 w-20 object-cover rounded">
+                                            <img 
+                                                src="{{ asset('storage/' . $voyage->image) }}" 
+                                                alt="{{ $voyage->destination }}" 
+                                                class="h-20 w-20 object-cover rounded"
+                                                onerror="this.onerror=null; this.src='/images/default.jpg';"
+                                            >
                                         </td>
                                         <td class="px-6 py-4">{{ $voyage->destination }}</td>
                                         <td class="px-6 py-4">{{ $voyage->ville_depart }}</td>
@@ -233,18 +240,63 @@
 
         function openEditModal(id) {
             fetch(`/voyages/${id}/edit`)
-                .then(response => response.json())
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Erreur lors de la récupération des données');
+                    }
+                    return response.json();
+                })
                 .then(voyage => {
+                    // Mise à jour du formulaire avec les données du voyage
                     document.getElementById('editForm').action = `/voyages/${voyage.id}`;
                     document.getElementById('editDestination').value = voyage.destination;
                     document.getElementById('editVilleDepart').value = voyage.ville_depart;
                     document.getElementById('editDescription').value = voyage.description;
                     document.getElementById('editPrix').value = voyage.prix;
-                    document.getElementById('editDateDepart').value = voyage.date_depart;
-                    document.getElementById('currentImage').src = '/storage/' + voyage.image;
+                    
+                    const dateDepart = new Date(voyage.date_depart);
+                    const formattedDate = dateDepart.toISOString().split('T')[0];
+                    document.getElementById('editDateDepart').value = formattedDate;
+                    
+                    if (voyage.image) {
+                        document.getElementById('currentImage').src = `${window.location.origin}/storage/${voyage.image}`;
+                    }
+                    
                     document.getElementById('editModal').classList.remove('hidden');
                 });
         }
+
+        // Ajoutez cette nouvelle fonction pour gérer la soumission du formulaire
+        document.getElementById('editForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(this);
+            const voyageId = this.action.split('/').pop();
+            
+            fetch(`/voyages/${voyageId}`, {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Erreur lors de la modification');
+                }
+                return response.json();
+            })
+            .then(data => {
+                if (data.success) {
+                    closeEditModal();
+                    // Rafraîchir la page pour voir les modifications
+                    window.location.reload();
+                } else {
+                    alert('Une erreur est survenue lors de la modification');
+                }
+            })
+            .catch(error => {
+                console.error('Erreur:', error);
+                alert('Une erreur est survenue lors de la modification');
+            });
+        });
 
         function closeEditModal() {
             document.getElementById('editModal').classList.add('hidden');
