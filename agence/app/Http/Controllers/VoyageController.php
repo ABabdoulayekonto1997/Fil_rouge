@@ -110,4 +110,10 @@ class VoyageController extends Controller
             return response()->json(['error' => 'Voyage non trouvé'], 404); 
         } 
     }
+
+    public function show($id)
+    {
+        $voyage = Voyage::findOrFail($id);
+        return view('voyages.show', compact('voyage'));
+    }
 }

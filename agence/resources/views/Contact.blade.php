@@ -378,6 +378,9 @@
             </div>
         </div>
 </footer>
-
+// ... existing code ...
+    @include('components.chat-widget')
+</body>
+</html>
 </body>
 </html>

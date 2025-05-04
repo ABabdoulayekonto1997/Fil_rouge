@@ -535,6 +535,9 @@
             });
         });
     </script>
-
+// ... existing code ...
+    @include('components.chat-widget')
+</body>
+</html>
 </body>
 </html>

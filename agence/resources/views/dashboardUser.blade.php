@@ -38,11 +38,11 @@
 
                 <!-- Historiques -->
                 <li>
-                    <a href="" class="flex items-center p-3 rounded-lg hover:bg-white hover:bg-opacity-20 transition-all duration-300 group">
+                    <a href="{{ route('mes-reservations') }}" class="flex items-center p-3 rounded-lg hover:bg-white hover:bg-opacity-20 transition-all duration-300 group">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3 group-hover:scale-110 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                         </svg>
-                        <span class="group-hover:font-medium">Historiques</span>
+                        <span class="group-hover:font-medium">Mes Réservations</span>
                     </a>
                 </li>
 
@@ -103,59 +103,74 @@
 
             <!-- Content Area -->
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 p-4">
-                <!-- Carte Réservations en cours - Version améliorée -->
-                <div class="bg-white rounded-xl shadow-md p-6 transition-all duration-300 hover:shadow-xl hover:-translate-y-1 border-l-4 border-[#0C4069]">
+                <!-- Carte Réservations en attente -->
+                <div class="bg-white rounded-xl shadow-md p-6 transition-all duration-300 hover:shadow-xl hover:-translate-y-1 border-l-4 border-yellow-500">
                     <div class="flex justify-between items-start mb-4">
-                        <h3 class="text-lg font-semibold text-gray-800">Réservations en cours</h3>
-                        <span class="bg-[#0C4069] text-white text-sm font-medium px-2.5 py-1 rounded-full">3</span>
+                        <h3 class="text-lg font-semibold text-gray-800">Réservations en attente</h3>
+                        <span class="bg-yellow-500 text-white text-sm font-medium px-2.5 py-1 rounded-full">
+                            {{ Auth::user()->reservations()->where('statut', 'en_attente')->count() }}
+                        </span>
                     </div>
                     
                     <div class="space-y-4">
                         <div class="border-b pb-4">
-                            <p class="text-sm text-gray-600 mb-1">Prochain voyage</p>
-                            <div class="flex items-center space-x-3">
-                                <span class="text-[#D88F42] font-medium">15 juin</span>
-                                <span class="text-gray-800">Douala</span>
-                            </div>
-                        </div>
-                        
-                        <div>
-                            <p class="text-sm text-gray-600 mb-1">Points de fidélité</p>
-                            <p class="text-[#0C4069] font-medium">123</p>
+                            <p class="text-sm text-gray-600 mb-1">Dernière réservation en attente</p>
+                            @php
+                                $lastPending = Auth::user()->reservations()
+                                    ->where('statut', 'en_attente')
+                                    ->latest('date_reservation')
+                                    ->first();
+                            @endphp
+                            @if($lastPending)
+                                <div class="flex items-center space-x-3">
+                                    <span class="text-yellow-500 font-medium">
+                                        {{ \Carbon\Carbon::parse($lastPending->date_reservation)->format('d M Y') }}
+                                    </span>
+                                    <span class="text-gray-800">{{ $lastPending->voyage->destination ?? 'N/A' }}</span>
+                                </div>
+                            @else
+                                <p class="text-gray-500">Aucune réservation en attente</p>
+                            @endif
                         </div>
                     </div>
                 </div>
 
-                <!-- Carte Prochains départs - Version améliorée -->
-                <div class="bg-white rounded-xl shadow-md p-6 transition-all duration-300 hover:shadow-xl hover:-translate-y-1 border-l-4 border-[#D88F42]">
+                <!-- Carte Réservations annulées -->
+                <div class="bg-white rounded-xl shadow-md p-6 transition-all duration-300 hover:shadow-xl hover:-translate-y-1 border-l-4 border-red-500">
                     <div class="flex justify-between items-start mb-4">
-                        <h3 class="text-lg font-semibold text-gray-800">Prochains départs</h3>
-                        <span class="bg-[#D88F42] text-white text-sm font-medium px-2.5 py-1 rounded-full">5</span>
+                        <h3 class="text-lg font-semibold text-gray-800">Réservations annulées</h3>
+                        <span class="bg-red-500 text-white text-sm font-medium px-2.5 py-1 rounded-full">
+                            {{ Auth::user()->reservations()->where('statut', 'annulée')->count() }}
+                        </span>
                     </div>
                     
-                    <div class="space-y-3">
-                        <div class="flex justify-between items-center py-2 border-b">
-                            <div>
-                                <p class="font-medium text-gray-800">Paris</p>
-                                <p class="text-sm text-gray-500">10:30 AM</p>
-                            </div>
-                            <span class="text-[#0C4069] font-medium">Vol AF443</span>
-                        </div>
-                        
-                        <div class="flex justify-between items-center py-2 border-b">
-                            <div>
-                                <p class="font-medium text-gray-800">New York</p>
-                                <p class="text-sm text-gray-500">14:15 PM</p>
-                            </div>
-                            <span class="text-[#0C4069] font-medium">Vol DL123</span>
-                        </div>
-                        
-                        <div class="pt-1">
-                            <p class="text-sm text-gray-600">+3 autres vols aujourd'hui</p>
+                    <div class="space-y-4">
+                        <div class="border-b pb-4">
+                            <p class="text-sm text-gray-600 mb-1">Dernière annulation</p>
+                            @php
+                                $lastCanceled = Auth::user()->reservations()
+                                    ->where('statut', 'annulée')
+                                    ->latest('date_reservation')
+                                    ->first();
+                            @endphp
+                            @if($lastCanceled)
+                                <div class="flex items-center space-x-3">
+                                    <span class="text-red-500 font-medium">
+                                        {{ \Carbon\Carbon::parse($lastCanceled->date_reservation)->format('d M Y') }}
+                                    </span>
+                                    <span class="text-gray-800">{{ $lastCanceled->voyage->destination ?? 'N/A' }}</span>
+                                </div>
+                            @else
+                                <p class="text-gray-500">Aucune réservation annulée</p>
+                            @endif
                         </div>
                     </div>
                 </div>
 
+                <!-- Carte Réservations en cours - Version améliorée -->
+
+
+                
                 <!-- Carte Statistiques - Version améliorée -->
                 <div class="bg-white rounded-xl shadow-md p-6 transition-all duration-300 hover:shadow-xl hover:-translate-y-1 border-l-4 border-[#0C4069]">
                     <h3 class="text-lg font-semibold text-gray-800 mb-4">Statistiques</h3>
@@ -256,32 +271,77 @@
                 <div class="bg-[#0C4069] rounded-xl shadow-md p-6 text-white transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
                     <h3 class="text-lg font-semibold mb-4">Assistance voyage</h3>
                     
-                    <div class="space-y-3 mb-4">
+                    <!-- Chat Widget -->
+                    <div class="bg-white rounded-lg p-4 text-gray-800">
+                        <div id="chat-messages" class="h-48 overflow-y-auto mb-4 space-y-2">
+                            <!-- Messages will be displayed here -->
+                            <div class="bg-gray-100 p-2 rounded-lg">
+                                <p class="text-sm">👋 Bonjour ! Comment puis-je vous aider aujourd'hui ?</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex gap-2">
+                            <input type="text" id="chat-input" 
+                                class="flex-1 rounded-lg border border-gray-300 p-2 text-sm focus:outline-none focus:border-[#D88F42]" 
+                                placeholder="Écrivez votre message...">
+                            <button onclick="sendMessage()" 
+                                class="bg-[#D88F42] text-white px-4 py-2 rounded-lg hover:bg-[#0C4069] transition-colors duration-300">
+                                Envoyer
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="space-y-3 mt-4">
+                        <!-- Existing contact options -->
                         <a href="#" class="flex items-center p-3 rounded-lg hover:bg-white hover:bg-opacity-20 transition-all duration-200">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
                             </svg>
                             <span>Contact urgent</span>
                         </a>
-                        
-                        <a href="#" class="flex items-center p-3 rounded-lg hover:bg-white hover:bg-opacity-20 transition-all duration-200">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
-                            </svg>
-                            <span>Chat en direct</span>
-                        </a>
-                        
-                        <a href="#" class="flex items-center p-3 rounded-lg hover:bg-white hover:bg-opacity-20 transition-all duration-200">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                            </svg>
-                            <span>Email</span>
-                        </a>
                     </div>
-                    
-                    <p class="text-sm opacity-80">Disponible 24h/24 pour votre prochain voyage</p>
                 </div>
+
+                <!-- Add this script at the end of your file -->
+                <script>
+                function sendMessage() {
+                    const input = document.getElementById('chat-input');
+                    const messages = document.getElementById('chat-messages');
+                    
+                    if (input.value.trim() !== '') {
+                        // Ajouter le message de l'utilisateur
+                        const userMessage = document.createElement('div');
+                        userMessage.className = 'bg-[#0C4069] text-white p-2 rounded-lg ml-8';
+                        userMessage.innerHTML = `<p class="text-sm">${input.value}</p>`;
+                        messages.appendChild(userMessage);
+                        
+                        // Simuler une réponse automatique
+                        setTimeout(() => {
+                            const botMessage = document.createElement('div');
+                            botMessage.className = 'bg-gray-100 text-gray-800 p-2 rounded-lg';
+                            botMessage.innerHTML = `<p class="text-sm">Je vais vous aider avec votre demande concernant "${input.value}"</p>`;
+                            messages.appendChild(botMessage);
+                            
+                            // Scroll to bottom
+                            messages.scrollTop = messages.scrollHeight;
+                        }, 1000);
+                        
+                        // Clear input
+                        input.value = '';
+                        
+                        // Scroll to bottom
+                        messages.scrollTop = messages.scrollHeight;
+                    }
+                }
+
+                // Permettre l'envoi avec la touche Entrée
+                document.getElementById('chat-input').addEventListener('keypress', function(e) {
+                    if (e.key === 'Enter') {
+                        sendMessage();
+                    }
+                });
+                </script>
             </div>
         </div>
-    </div>
+</div>
 </x-app-layout>

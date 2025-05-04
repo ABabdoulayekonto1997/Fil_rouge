@@ -202,4 +202,7 @@
         </div>
     </body>
 </html>
+@include('components.chat-widget')
+</body>
+</html>
 <script src="https://cdn.tailwindcss.com"></script>

@@ -13,13 +13,7 @@ Route::view('/contact','contact');
 Route::view('/Apropos','Apropos');
 Route::view('/destinations','destinations');
 Route::get('/dashboardGestionUser',[UserController::class, 'index'])->name('GestionUser');
-// Current incorrect route
-Route::get('/dashboardGestionVoyage',[UserController::class, 'index'])->name('dashboardGestionVoyage');
-
-// Should be changed to
 Route::get('/dashboardGestionVoyage',[VoyageController::class, 'index'])->name('dashboardGestionVoyage');
-
-
 
 Route::get('/dashboard', function () {
     $user = Auth::user();
@@ -48,21 +42,22 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/voyages/search', [VoyageController::class, 'search'])->name('voyages.search');
     
     // Routes pour les réservations
-    Route::get('/reservation', [ReservationController::class, 'index'])->name('reservation');
+    Route::get('/mes-reservations', [ReservationController::class, 'mesReservations'])->name('mes-reservations');
     Route::get('/reservationgestion', [ReservationController::class, 'showReservations'])->name('ReservationGestion');
     Route::get('/reservations/search', [ReservationController::class, 'search'])->name('reservations.search');
     Route::post('/reservations', [ReservationController::class, 'store'])->name('reservations.store');
     
     // Routes pour l'admin
     Route::middleware(['admin'])->group(function () {
-        Route::patch('/reservations/{reservation}/confirm', [ReservationController::class, 'confirm'])->name('reservation.confirm');
+        Route::patch('/reservations/{reservation}/confirm', [ReservationController::class, 'confirm'])->name('reservations.confirm');
+        Route::patch('/reservations/{reservation}/annuler', [ReservationController::class, 'annuler'])->name('reservations.annuler');
     });
 });
+
 require __DIR__.'/auth.php';
 Route::get('/reservation', [ReservationController::class, 'index'])->name('reservation');
-// Inside middleware group
-Route::get('/reservationgestion', [ReservationController::class, 'index'])->name('ReservationGestion');
-
-// Outside middleware group (duplicate)
 Route::get('/reservationgestion', [ReservationController::class, 'index'])->name('ReservationGestion');
 Route::get('/voyages/search', [VoyageController::class, 'search'])->name('voyages.search');
+Route::post('/reservation', [ReservationController::class, 'store'])->name('reservation.store');
+
+Route::delete('/reservations/{reservation}', [ReservationController::class, 'destroy'])->name('reservations.destroy');

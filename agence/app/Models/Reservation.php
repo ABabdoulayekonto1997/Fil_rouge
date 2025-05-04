@@ -14,7 +14,7 @@ class Reservation extends Model
     // Relations
     public function utilisateur()
     {
-        return $this->belongsTo(User::class, 'utilisateur_id');
+        return $this->belongsTo(User::class);
     }
 
     public function voyage()
