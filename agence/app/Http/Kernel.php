@@ -51,6 +51,11 @@ protected $routeMiddleware = [
     'admin' => \App\Http\Middleware\AdminMiddleware::class,
 ];
 protected $routeMiddleware = [
+    // ... existing code ...
+    'admin' => \App\Http\Middleware\AdminMiddleware::class,
+    // ... existing code ...
+];
+protected $routeMiddleware = [
     'auth' => \App\Http\Middleware\Authenticate::class,
     'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
     'auth.session' => \Illuminate\Session\Middleware\AuthenticateSession::class,

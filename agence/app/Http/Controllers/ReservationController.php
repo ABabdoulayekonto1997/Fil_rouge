@@ -15,10 +15,10 @@ class ReservationController extends Controller
         return view('Reservation', compact('voyages'));
     }
 
-    public function showReservations()
+    public function gestionReservation()
     {
         $reservations = Reservation::with(['utilisateur', 'voyage'])->get();
-        return view('ReservationGestion', compact('reservations'));
+        return view('gestion-reservation', compact('reservations'));
     }
 
     public function mesReservations()

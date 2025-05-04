@@ -14,7 +14,16 @@ Route::view('/Apropos','Apropos');
 Route::view('/destinations','destinations');
 Route::get('/dashboardGestionUser',[UserController::class, 'index'])->name('GestionUser');
 Route::get('/dashboardGestionVoyage',[VoyageController::class, 'index'])->name('dashboardGestionVoyage');
+// Remove these duplicate routes
+Route::get('/gestion-reservation', function () {
+    return view('gestion-reservation');
+})->name('GestionReservation');
+Route::get('/gestion-reservation', function () {
+    return view('gestion-reservation');
+})->name('GestionReservation');
 
+// Keep only this one
+Route::get('/gestion-reservation', [ReservationController::class, 'gestionReservation'])->name('GestionReservation');
 Route::get('/dashboard', function () {
     $user = Auth::user();
 
@@ -60,4 +69,4 @@ Route::get('/reservationgestion', [ReservationController::class, 'index'])->name
 Route::get('/voyages/search', [VoyageController::class, 'search'])->name('voyages.search');
 Route::post('/reservation', [ReservationController::class, 'store'])->name('reservation.store');
 
-Route::delete('/reservations/{reservation}', [ReservationController::class, 'destroy'])->name('reservations.destroy');
+Route::delete('/reservations/{reservation}', 'ReservationController@destroy')->name('reservations.destroy');

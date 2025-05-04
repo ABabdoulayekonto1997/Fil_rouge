@@ -1,8 +1,6 @@
 <x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-white leading-tight">
-            {{ __('Gestion des Réservations') }}
-        </h2>
+    <x-slot name="adminheader">
+        
     </x-slot>
 
     <div class="py-12">
@@ -50,7 +48,7 @@
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
                                         @if($reservation->statut === 'en_attente')
-                                            <form action="{{ route('reservation.confirm', $reservation->id) }}" method="POST" class="inline">
+                                            <form action="{{ route('reservations.confirm', $reservation->id) }}" method="POST" class="inline">
                                                 @csrf
                                                 @method('PATCH')
                                                 <button type="submit" class="text-green-600 hover:text-green-900 mr-3">Confirmer</button>

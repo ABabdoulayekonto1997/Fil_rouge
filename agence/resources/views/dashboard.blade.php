@@ -37,7 +37,7 @@
 
 
                 <li>
-                    <a href="{{ route('ReservationGestion') }}" class="flex items-center p-3 rounded-lg hover:bg-white hover:bg-opacity-20 transition-all duration-300 group">
+                    <a href="{{ route('GestionReservation') }}" class="flex items-center p-3 rounded-lg hover:bg-white hover:bg-opacity-20 transition-all duration-300 group">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3 group-hover:scale-110 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                         </svg>
@@ -121,7 +121,7 @@
                         </div>
                         <div>
                             <h3 class="text-gray-500 font-medium">Réservations en attente</h3>
-                            <p class="text-3xl font-bold text-[#0C4069]">24</p>
+                            <p class="text-3xl font-bold text-[#0C4069]"></p>
                         </div>
                     </div>
                 </div>
