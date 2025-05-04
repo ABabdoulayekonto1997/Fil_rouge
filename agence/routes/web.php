@@ -2,7 +2,8 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\VoyageController;  // Add this line
+use App\Http\Controllers\VoyageController;
+use App\Http\Controllers\ReservationController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -45,6 +46,23 @@ Route::middleware(['auth'])->group(function () {
     // Voyage routes
     Route::resource('voyages', VoyageController::class);
     Route::get('/voyages/search', [VoyageController::class, 'search'])->name('voyages.search');
+    
+    // Routes pour les réservations
+    Route::get('/reservation', [ReservationController::class, 'index'])->name('reservation');
+    Route::get('/reservationgestion', [ReservationController::class, 'showReservations'])->name('ReservationGestion');
+    Route::get('/reservations/search', [ReservationController::class, 'search'])->name('reservations.search');
+    Route::post('/reservations', [ReservationController::class, 'store'])->name('reservations.store');
+    
+    // Routes pour l'admin
+    Route::middleware(['admin'])->group(function () {
+        Route::patch('/reservations/{reservation}/confirm', [ReservationController::class, 'confirm'])->name('reservation.confirm');
+    });
 });
-
 require __DIR__.'/auth.php';
+Route::get('/reservation', [ReservationController::class, 'index'])->name('reservation');
+// Inside middleware group
+Route::get('/reservationgestion', [ReservationController::class, 'index'])->name('ReservationGestion');
+
+// Outside middleware group (duplicate)
+Route::get('/reservationgestion', [ReservationController::class, 'index'])->name('ReservationGestion');
+Route::get('/voyages/search', [VoyageController::class, 'search'])->name('voyages.search');

@@ -86,31 +86,19 @@ class VoyageController extends Controller
 
     public function search(Request $request)
     {
-        try {
-            $term = $request->query('term');
-            
-            if (empty($term)) {
-                return response()->json([
-                    'success' => true,
-                    'voyages' => Voyage::paginate(10)
-                ]);
-            }
-    
-            $voyages = Voyage::where(function($query) use ($term) {
-                $query->where('destination', 'LIKE', "%{$term}%")
-                      ->orWhere('description', 'LIKE', "%{$term}%");
-            })->get();
-    
-            return response()->json([
-                'success' => true,
-                'voyages' => $voyages
-            ]);
-        } catch (\Exception $e) {
-            return response()->json([
-                'success' => false,
-                'message' => 'Erreur lors de la recherche : ' . $e->getMessage()
-            ], 422);
+        $query = Voyage::query();
+
+        if ($request->filled('destination')) {
+            $query->where('destination', 'like', '%' . $request->destination . '%');
         }
+
+        if ($request->filled('date_depart')) {
+            $query->whereDate('date_depart', $request->date_depart);
+        }
+
+        $voyages = $query->get();
+
+        return view('Reservation', compact('voyages'));
     }
 
     public function edit($id) 
