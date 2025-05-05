@@ -28,7 +28,7 @@
 </head>
 <body>
 
-    <header class="fixed px-8 py-2 top-0 left-0 right-0 bg-white px-1 py-4 shadow-md z-50">
+    <header class="pb- fixed px-8 py-2 top-0 left-0 right-0 bg-white px-1 py-4 shadow-md z-50">
         <div class=" mx-auto">
             <div class="flex items-center">
                 <!-- Logo à gauche -->
@@ -64,6 +64,9 @@
   >
     <span class="sr-only">Ouvrir le menu utilisateur</span>
     <span class="mr-2 text-sm font-medium text-[#0C4069]">{{ Auth::user()->name }}</span>
+    <div class="h-8 w-8 rounded-full bg-blue-100 flex items-center justify-center">
+                    <span class="text-blue-600 font-medium">{{ strtoupper(substr(Auth::user()->name, 0, 1)) }}</span>
+                </div>
     <svg 
       class="h-5 w-5 text-[#0C4069] transform transition-transform duration-200" 
       :class="{ 'rotate-180': open }"
@@ -161,13 +164,13 @@
                 <a href="#" class="block py-2 text-gray-700 hover:text-blue-600">Se connecter</a>
             </div>
         </div>
-    </header>
+    </header><br><br>
    <!--baniere  -->
 
-    <section class="px-1 py-4 relative w-full h-[450px]  overflow-hidden">
+    <section class="pt-64  relative w-full h-[450px]  overflow-hidden">
         <img src="{{ asset('build/assets/image/img_baniere.png') }}" alt="Bannière" class="absolute w-full h-full object-cover">
         <div class="absolute inset-0 flex items-center justify-center px-6 py-4">
-            <div class="grid  grid-cols-[50%_45%] md:flex-row items-center  w-full max-w-6xl mx-auto text-white">
+            <div class="grid  grid-cols-[50%_50%] md:flex-row items-center  w-full max-w-6xl mx-auto text-white">
                         <!-- Texte à gauche -->
                 <div class="text-center md:text-left mb-8 md:mb-0">
                     <h1 class="text-4xl text-center md:text-5xl text-[#0C4069] animate-bounce font-bold mb-4">Trouvez, Réservez, Partez </h1>
@@ -182,7 +185,7 @@
                         </a>
                 </div>
             <!-- Image à droite -->
-                <div class="">
+                <div  class="pl-32">
                     <img src="{{ asset('build/assets/image/imageBanierer.png') }}" alt="Logo" 
                     class=" h-auto transform transition-transform duration-700 hover:-translate-x-32">
                 </div>

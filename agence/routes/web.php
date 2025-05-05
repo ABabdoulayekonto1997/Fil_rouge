@@ -49,7 +49,7 @@ Route::middleware(['auth'])->group(function () {
     // Voyage routes
     Route::resource('voyages', VoyageController::class);
     Route::get('/voyages/search', [VoyageController::class, 'search'])->name('voyages.search');
-    
+    Route::delete('/reservations/{id}', [ReservationController::class, 'annuler'])->name('reservations.annuler');
     // Routes pour les réservations
     Route::get('/mes-reservations', [ReservationController::class, 'mesReservations'])->name('mes-reservations');
     Route::get('/reservationgestion', [ReservationController::class, 'showReservations'])->name('ReservationGestion');

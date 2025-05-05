@@ -66,7 +66,17 @@ class ReservationController extends Controller
 
         return view('Reservation', compact('voyages'));
     }
-
+    public function annuler($id)
+    {
+        try {
+            $reservation = Reservation::findOrFail($id);
+            $reservation->delete();
+            
+            return redirect()->back()->with('success', 'Réservation annulée avec succès');
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'Erreur lors de l\'annulation de la réservation');
+        }
+    }
     public function store(Request $request)
     {
         $request->validate([

@@ -82,77 +82,92 @@
                 </li>
             </ul>  
         </div>
-
         <!-- Main Content (85%) -->
         <div class="p-6">
-            <!-- Header Section -->
-            Illuminate\Contracts\Container\BindingResolutionException
-Target class [admin] does not exist.
-            <div class="py-12">
-            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                    <div class="p-6">
-                        <h2 class="text-2xl font-bold text-[#0C4069] mb-6">Mes Réservations</h2>
-                        
-                        @if($reservations->isEmpty())
-                            <p class="text-gray-500 text-center py-8">Vous n'avez pas encore de réservations.</p>
-                        @else
-                            <div class="overflow-x-auto">
-                                <table class="min-w-full divide-y divide-gray-200">
-                                    <thead class="bg-gray-50">
-                                        <tr>
-                                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Destination</th>
-                                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Date de départ</th>
-                                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Prix</th>
-                                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Statut</th>
-                                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody class="bg-white divide-y divide-gray-200">
-                                        @foreach($reservations as $reservation)
-                                        <tr>
-                                            <td class="px-6 py-4 whitespace-nowrap">
-                                                <div class="text-sm text-gray-900">{{ $reservation->voyage ? $reservation->voyage->destination : 'N/A' }}</div>
-                                            </td>
-                                            <td class="px-6 py-4 whitespace-nowrap">
-                                                <div class="text-sm text-gray-900">{{ $reservation->voyage ? \Carbon\Carbon::parse($reservation->voyage->date_depart)->format('d/m/Y') : 'N/A' }}</div>
-                                            </td>
-                                            <td class="px-6 py-4 whitespace-nowrap">
-                                                <div class="text-sm text-gray-900">{{ $reservation->voyage ? number_format($reservation->voyage->prix, 2) . ' €' : 'N/A' }}</div>
-                                            </td>
-                                            <td class="px-6 py-4 whitespace-nowrap">
-                                                <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full 
-                                                    @if($reservation->statut === 'confirmée')
+    <!-- Header Section -->
+    <div class="py-12">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                <div class="p-6">
+                    <h2 class="text-2xl font-bold text-[#0C4069] mb-6">Mes Réservations</h2>
+                    
+                    @if($reservations->isEmpty())
+                        <div class="text-center py-8">
+                            <svg class="mx-auto h-12 w-12 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+                            </svg>
+                            <p class="mt-2 text-gray-500">Aucune réservation trouvée</p>
+                        </div>
+                    @else
+                        <div class="overflow-x-auto rounded-lg border border-gray-200">
+                            <table class="min-w-full divide-y divide-gray-200">
+                                <thead class="bg-gray-50">
+                                    <tr>
+                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Destination</th>
+                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Date de départ</th>
+                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Prix</th>
+                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Statut</th>
+                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="bg-white divide-y divide-gray-200">
+                                    @foreach($reservations as $reservation)
+                                    <tr class="hover:bg-gray-50 transition-colors duration-150">
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <div class="flex items-center">
+                                                <div class="text-sm font-medium text-gray-900">
+                                                    {{ $reservation->voyage ? $reservation->voyage->destination : 'Non spécifié' }}
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <div class="text-sm text-gray-900">
+                                                {{ $reservation->voyage ? \Carbon\Carbon::parse($reservation->voyage->date_depart)->isoFormat('LL') : 'Non spécifié' }}
+                                            </div>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <div class="text-sm font-medium text-gray-900">
+                                                {{ $reservation->voyage ? number_format($reservation->voyage->prix, 2, ',', ' ') . ' €' : 'Non spécifié' }}
+                                            </div>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <span class="px-3 py-1 inline-flex text-xs leading-5 font-semibold rounded-full 
+                                                @switch($reservation->statut)
+                                                    @case('confirmée')
                                                         bg-green-100 text-green-800
-                                                    @elseif($reservation->statut === 'en_attente')
+                                                        @break
+                                                    @case('en_attente')
                                                         bg-yellow-100 text-yellow-800
-                                                    @else
+                                                        @break
+                                                    @default
                                                         bg-red-100 text-red-800
-                                                    @endif">
-                                                        {{ ucfirst($reservation->statut) }}
-                                                    </span>
-                                            </td>
-                                            <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                                @if($reservation->statut !== 'annulée')
-                                                <form method="POST" action="{{ route('reservations.destroy', $reservation->id) }}" class="inline">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button type="submit" class="text-red-600 hover:text-red-800" onclick="return confirm('Êtes-vous sûr de vouloir annuler cette réservation ?')">
-                                                        Annuler la réservation
-                                                    </button>
-                                                </form>
-                                                    @endif
-                                            </td>
-                                        </tr>
-                                        @endforeach
-                                    </tbody>
-                                </table>
-                            </div>
-                        @endif
-                    </div>
+                                                @endswitch">
+                                                {{ ucfirst(str_replace('_', ' ', $reservation->statut)) }}
+                                            </span>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                            @if($reservation->statut !== 'annulée')
+                                            <form method="POST" action="{{ route('reservations.destroy', $reservation->id) }}" class="inline">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" 
+                                                    class="text-red-600 hover:text-red-800 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-opacity-50"
+                                                    onclick="return confirm('Voulez-vous vraiment annuler cette réservation ? Cette action est irréversible.')">
+                                                    Demander l'annulation
+                                                </button>
+                                            </form>
+                                            @endif
+                                        </td>
+                                    </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                    @endif
                 </div>
             </div>
-    </div>
         </div>
     </div>
+</div>
+</div>
 </x-app-layout>

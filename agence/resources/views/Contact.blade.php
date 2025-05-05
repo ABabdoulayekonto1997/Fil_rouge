@@ -60,6 +60,9 @@
   >
     <span class="sr-only">Ouvrir le menu utilisateur</span>
     <span class="mr-2 text-sm font-medium text-[#0C4069]">{{ Auth::user()->name }}</span>
+    <div class="h-8 w-8 rounded-full bg-blue-100 flex items-center justify-center">
+                    <span class="text-blue-600 font-medium">{{ strtoupper(substr(Auth::user()->name, 0, 1)) }}</span>
+                </div>
     <svg 
       class="h-5 w-5 text-[#0C4069] transform transition-transform duration-200" 
       :class="{ 'rotate-180': open }"
