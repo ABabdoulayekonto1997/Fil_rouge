@@ -45,13 +45,13 @@ class VoyageController extends Controller
             $validated = $request->validate([
                 'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
                 'destination' => 'required|string|max:255',
+                'ville_depart' => 'required|string|max:255', // Ajout de la validation pour ville_depart
                 'description' => 'nullable|string',
                 'prix' => 'required|numeric|min:0',
                 'date_depart' => 'required|date'
             ]);
 
             if ($request->hasFile('image')) {
-                // Supprimer l'ancienne image
                 if ($voyage->image) {
                     Storage::disk('public')->delete($voyage->image);
                 }

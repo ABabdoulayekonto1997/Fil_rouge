@@ -45,10 +45,10 @@
                 <!-- Boutons à droite -->
                 @guest
                 <div class="hidden md:flex items-center space-x-6">
-                    <a href="{{ route('register') }}" class="text-[#D88F42] hover:text-[#0C4069] transition px-4 py-2">Inscription</a>
-                    <a href="{{ route('login') }}" class="bg-[#D88F42] hover:bg-[#0C4069] text-white rounded-lg px-6 py-2 transition">
+                    <button onclick="openRegistrationModal()" class="text-[#D88F42] hover:text-[#0C4069] transition px-4 py-2">Inscription</button>
+                    <button onclick="openLoginModal()" class="bg-[#D88F42] hover:bg-[#0C4069] text-white rounded-lg px-6 py-2 transition">
                         <b>Se connecter</b>
-                    </a>
+                    </button>
                 </div>
                 @endguest
             @auth
@@ -756,4 +756,278 @@
 
 </body>
 </html>
+<!-- Ajoutez ceci juste avant la fermeture du body -->
+<!-- Modal d'inscription -->
+<div id="registrationModal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
+    <div class="bg-white rounded-lg p-8 max-w-md w-full mx-4">
+        <div class="flex justify-between items-center mb-6">
+            <h2 class="text-2xl font-bold text-[#0C4069]">Inscription</h2>
+            <button onclick="closeRegistrationModal()" class="text-gray-500 hover:text-gray-700">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+            </button>
+        </div>
+        
+        <form method="POST" action="{{ route('register') }}" class="space-y-4">
+            @csrf
+            <div>
+                <label for="name" class="block text-sm font-medium text-gray-700">Nom complet</label>
+                <input type="text" name="name" id="name" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#D88F42] focus:ring focus:ring-[#D88F42] focus:ring-opacity-50">
+            </div>
+
+            <div>
+                <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
+                <input type="email" name="email" id="email" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#D88F42] focus:ring focus:ring-[#D88F42] focus:ring-opacity-50">
+            </div>
+
+            <div>
+                <label for="password" class="block text-sm font-medium text-gray-700">Mot de passe</label>
+                <input type="password" name="password" id="password" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#D88F42] focus:ring focus:ring-[#D88F42] focus:ring-opacity-50">
+            </div>
+
+            <div>
+                <label for="password_confirmation" class="block text-sm font-medium text-gray-700">Confirmer le mot de passe</label>
+                <input type="password" name="password_confirmation" id="password_confirmation" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#D88F42] focus:ring focus:ring-[#D88F42] focus:ring-opacity-50">
+            </div>
+
+            <button type="submit" class="w-full bg-[#D88F42] hover:bg-[#0C4069] text-white font-bold py-2 px-4 rounded-lg transition duration-300">
+                S'inscrire
+            </button>
+        </form>
+    </div>
+</div>
+
+<script>
+function openRegistrationModal() {
+    document.getElementById('registrationModal').classList.remove('hidden');
+    document.getElementById('registrationModal').classList.add('flex');
+    document.body.style.overflow = 'hidden';
+}
+
+function closeRegistrationModal() {
+    document.getElementById('registrationModal').classList.add('hidden');
+    document.getElementById('registrationModal').classList.remove('flex');
+    document.body.style.overflow = 'auto';
+}
+
+// Fermer le modal en cliquant en dehors
+document.getElementById('registrationModal').addEventListener('click', function(e) {
+    if (e.target === this) {
+        closeRegistrationModal();
+    }
+});
+</script>
+</body>
+</html>
+<!-- Ajoutez ceci juste avant la fermeture du body, après le modal d'inscription -->
+<!-- Modal de connexion -->
+<div id="loginModal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
+    <div class="bg-white rounded-lg p-8 max-w-md w-full mx-4">
+        <div class="flex justify-between items-center mb-6">
+            <h2 class="text-2xl font-bold text-[#0C4069]">Connexion</h2>
+            <button onclick="closeLoginModal()" class="text-gray-500 hover:text-gray-700">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+            </button>
+        </div>
+        
+        <form method="POST" action="{{ route('login') }}" class="space-y-4">
+            @csrf
+            <div>
+                <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
+                <input type="email" name="email" id="email" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#D88F42] focus:ring focus:ring-[#D88F42] focus:ring-opacity-50">
+            </div>
+
+            <div>
+                <label for="password" class="block text-sm font-medium text-gray-700">Mot de passe</label>
+                <input type="password" name="password" id="password" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#D88F42] focus:ring focus:ring-[#D88F42] focus:ring-opacity-50">
+            </div>
+
+            <div class="flex items-center justify-between">
+                <div class="flex items-center">
+                    <input type="checkbox" name="remember" id="remember" class="rounded border-gray-300 text-[#D88F42] focus:ring-[#D88F42]">
+                    <label for="remember" class="ml-2 block text-sm text-gray-700">Se souvenir de moi</label>
+                </div>
+                <a href="{{ route('password.request') }}" class="text-sm text-[#D88F42] hover:text-[#0C4069]">
+                    Mot de passe oublié ?
+                </a>
+            </div>
+
+            <button type="submit" class="w-full bg-[#D88F42] hover:bg-[#0C4069] text-white font-bold py-2 px-4 rounded-lg transition duration-300">
+                Se connecter
+            </button>
+        </form>
+    </div>
+</div>
+
+<script>
+// Ajoutez ces fonctions à votre script existant
+function openLoginModal() {
+    document.getElementById('loginModal').classList.remove('hidden');
+    document.getElementById('loginModal').classList.add('flex');
+    document.body.style.overflow = 'hidden';
+}
+
+function closeLoginModal() {
+    document.getElementById('loginModal').classList.add('hidden');
+    document.getElementById('loginModal').classList.remove('flex');
+    document.body.style.overflow = 'auto';
+}
+
+// Fermer le modal en cliquant en dehors
+document.getElementById('loginModal').addEventListener('click', function(e) {
+    if (e.target === this) {
+        closeLoginModal();
+    }
+});
+</script>
+</body>
+</html>
+<!-- Testimonials Section -->
+<section class="bg-[#0C4069] py-16">
+        <div class="container mx-auto px-4 relative">
+            <!-- Titre section -->
+            <h2 class="text-3xl md:text-4xl font-bold text-white text-center mb-12">Ils nous ont fait confiance</h2>
+            
+            <!-- Conteneur témoignages -->
+            <div class="max-w-4xl mx-auto relative">
+                <!-- Témoignage -->
+                <div class="bg-white rounded-3xl p-8 md:p-12 shadow-lg relative">
+                    <!-- Photo + Nom -->
+                    <div class="flex flex-col md:flex-row items-center gap-6 mb-8">
+                        <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&h=200&q=80" 
+                             alt="Fatima" 
+                             class="w-20 h-20 md:w-24 md:h-24 rounded-full object-cover border-4 border-[#D88F42]">
+                        <div class="text-center md:text-left">
+                            <h3 class="text-xl md:text-2xl font-semibold text-[#0C4069]">Fatima D.</h3>
+                            <p class="text-gray-500">N'Djamena, Tchad</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Citation -->
+                    <div class="relative">
+                        <i class="fas fa-quote-left text-[#D88F42] text-4xl opacity-20 absolute -top-4 -left-2"></i>
+                        <p class="text-gray-700 text-base md:text-lg leading-relaxed italic pl-8">
+                            "Un service rapide, professionnel et très à l'écoute. Mon voyage a été parfaitement organisé du début à la fin. Je recommande vivement !"
+                        </p>
+                        <i class="fas fa-quote-right text-[#D88F42] text-4xl opacity-20 absolute -bottom-4 -right-2"></i>
+                    </div>
+                    
+                    <!-- Indicateurs -->
+                    <div class="flex justify-center gap-2 mt-8">
+                        <span class="w-3 h-3 rounded-full bg-[#D88F42]"></span>
+                        <span class="w-3 h-3 rounded-full bg-gray-300"></span>
+                        <span class="w-3 h-3 rounded-full bg-gray-300"></span>
+                    </div>
+                </div>
+                
+                <!-- Flèches de navigation -->
+                <button class="hidden md:block absolute -left-16 top-1/2 -translate-y-1/2 bg-[#D88F42] text-white rounded-full w-12 h-12 flex items-center justify-center hover:bg-[#0C4069] transition-colors">
+                    <i class="fas fa-arrow-left"></i>
+                </button>
+                <button class="hidden md:block absolute -right-16 top-1/2 -translate-y-1/2 bg-[#D88F42] text-white rounded-full w-12 h-12 flex items-center justify-center hover:bg-[#0C4069] transition-colors">
+                    <i class="fas fa-arrow-right"></i>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    
+<section class="py-16 bg-gray-50">
+    <div class="container mx-auto px-4">
+        <div class="max-w-4xl mx-auto">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-[#0C4069] mb-4 flex items-center justify-center">
+                    <i class="fas fa-question-circle text-[#D88F42] mr-3"></i>
+                    FAQ - Questions Fréquemment Posées
+                </h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- FAQ Content -->
+                <div class="space-y-4">
+                    <!-- Question 1 -->
+                    <div class="bg-white rounded-lg shadow-sm overflow-hidden" x-data="{ open: false }">
+                        <button class="w-full px-6 py-4 text-left flex items-center justify-between hover:bg-gray-50" @click="open = !open">
+                            <span class="font-semibold text-[#0C4069]">Quels types de voyages proposez-vous ?</span>
+                            <i class="fas fa-plus text-[#D88F42] transform transition-transform" :class="{ 'rotate-45': open }"></i>
+                        </button>
+                        <div class="px-6 py-4 bg-gray-50 " x-show="open" x-collapse>
+                            <p class="text-gray-600 ">Nous proposons une large gamme de voyages : vols, hôtels, packages tout compris, circuits touristiques, et séjours sur mesure pour répondre à tous vos besoins.</p>
+                        </div>
+                    </div>
+
+                    <!-- Question 2 -->
+                    <div class="bg-white rounded-lg shadow-sm overflow-hidden" x-data="{ open: false }">
+                        <button class="w-full px-6 py-4 text-left flex items-center justify-between hover:bg-gray-50" @click="open = !open">
+                            <span class="font-semibold text-[#0C4069]">Comment puis-je modifier ou annuler ma réservation ?</span>
+                            <i class="fas fa-plus text-[#D88F42] transform transition-transform" :class="{ 'rotate-45': open }"></i>
+                        </button>
+                        <div class="px-6 py-4 bg-gray-50" x-show="open" x-collapse>
+                            <p class="text-gray-600">Connectez-vous à votre compte et accédez à la section "Mes réservations". Vous pourrez y gérer vos modifications ou annulations selon nos conditions générales.</p>
+                        </div>
+                    </div>
+
+                    <!-- Question 3 -->
+                    <div class="bg-white rounded-lg shadow-sm overflow-hidden" x-data="{ open: false }">
+                        <button class="w-full px-6 py-4 text-left flex items-center justify-between hover:bg-gray-50" @click="open = !open">
+                            <span class="font-semibold text-[#0C4069]">Puis-je réserver pour une autre personne ?</span>
+                            <i class="fas fa-plus text-[#D88F42] transform transition-transform" :class="{ 'rotate-45': open }"></i>
+                        </button>
+                        <div class="px-6 py-4 bg-gray-50" x-show="open" x-collapse>
+                            <p class="text-gray-600">Oui, vous pouvez réserver pour d'autres personnes. Assurez-vous simplement de fournir les informations correctes des voyageurs lors de la réservation.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Image Column -->
+                <div class="hidden md:block">
+                    <img src="{{ asset('build/assets/image/imgfqa.jpg') }}" alt="Support Client" class="rounded-lg shadow-lg w-full h-auto object-cover">
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+    
+    <footer class=" bg-gray-900 text-white relative overflow-hidden">
+            <!-- Fond texturé -->
+            <div class=" absolute inset-0 bg-footer-texture bg-cover opacity-10"></div>
+            
+            <div class="relative z-10 pt-16 pb-12 px-4 sm:px-6 lg:px-8">
+                <div class="max-w-7xl mx-auto">
+                    <div class="grid grid-cols-1 md:grid-cols-4 gap-10">
+                        <!-- Logo et description -->
+                        <div class="md:col-span-2">
+                            <div class="flex items-center mb-6">
+                                <img src="{{ asset('build/assets/image/logo_blanc.png') }}" alt="Logo" class="h-24 w-auto">
+                
+                        </div>
+                            <p class="text-gray-300 text-lg leading-relaxed mb-6">
+                                Votre partenaire de confiance pour réserver vos voyages en toute sécurité et simplicité, où que vous soyez.
+                            </p>
+                            <div class="flex space-x-4">
+                                <a href="#" class="bg-akm-orange text-white p-3 rounded-full hover:bg-white hover:text-akm-orange transition-all duration-300">
+                                    <i class="fab fa-facebook-f"></i>
+                                </a>
+                                <a href="#" class="bg-akm-orange text-white p-3 rounded-full hover:bg-white hover:text-akm-orange transition-all duration-300">
+                                    <i class="fab fa-twitter"></i>
+                                </a>
+                                <a href="#" class="bg-akm-orange text-white p-3 rounded-full hover:bg-white hover:text-akm-orange transition-all duration-300">
+                                    <i class="fab fa-instagram"></i>
+                                </a>
+                                <a href="#" class="bg-akm-orange text-white p-3 rounded-full hover:bg-white hover:text-akm-orange transition-all duration-300">
+                                    <i class="fab fa-linkedin-in"></i>
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- Navigation -->
+                        <div>
+                            <h2 class="text-xl font-bold text-akm-orange mb-6 relative pb-2 after:content-[''] after:absolute after:left-0 after:bottom-0 after:w-16 after:h-1 after:bg-akm-orange">
+                                Navigation
+                            </h2>
+                            <ul class="space-y-3">
+                                <li><a href="#" class="text-gray-300 hover:text-white hover:pl-2 transition-all duration-3
 
