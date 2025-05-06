@@ -6,96 +6,109 @@
 <div class="grid grid-cols-[15%_85%] min-h-screen bg-gray-50">
         <!-- Sidebar (15%) -->
         <div class="bg-[#0C4069] h-full w-[188px] sticky top-0">
-            <ul class="text-white p-4 space-y-3">
-            <li>
-                    <a href="{{ route('dashboard') }}" class="flex items-center p-3 rounded-lg hover:bg-white hover:bg-opacity-20 transition-all duration-300 group">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3 group-hover:scale-110 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
-                        </svg>
-                        <span class="group-hover:font-medium">Dashboard</span>
-                    </a>
-                </li>   
-            <!-- Accueil -->
-                <li>
-                    <a href="{{ url('/') }}" class="flex items-center p-3 rounded-lg hover:bg-white hover:bg-opacity-20 transition-all duration-300 group">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3 group-hover:scale-110 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
-                        </svg>
-                        <span class="group-hover:font-medium">Accueil</span>
-                    </a>
-                </li>
+    <ul class="text-white p-4 space-y-3">
+        <!-- Dashboard -->
+        <li>
+            <a href="{{ route('dashboard') }}" class="flex items-center p-3 rounded-lg transition-all duration-300 group 
+                {{ request()->routeIs('dashboard') ? 'bg-white bg-opacity-20 font-medium' : 'hover:bg-white hover:bg-opacity-20' }}">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3 {{ request()->routeIs('dashboard') ? 'scale-110' : 'group-hover:scale-110' }} transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
+                </svg>
+                <span>Dashboard</span>
+            </a>
+        </li>   
+        
+        <!-- Accueil -->
+        <li>
+            <a href="{{ url('/') }}" class="flex items-center p-3 rounded-lg transition-all duration-300 group 
+                {{ request()->is('/') ? 'bg-white bg-opacity-20 font-medium' : 'hover:bg-white hover:bg-opacity-20' }}">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3 {{ request()->is('/') ? 'scale-110' : 'group-hover:scale-110' }} transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+                </svg>
+                <span>Accueil</span>
+            </a>
+        </li>
 
-                <!-- utilisateur -->
-                <li>
-                    <a href="{{route('GestionUser') }}" class="flex items-center p-3 rounded-lg hover:bg-white hover:bg-opacity-20 transition-all duration-300 group">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3 group-hover:scale-110 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                        </svg>
-                        <span class="group-hover:font-medium">Utilisateur</span>
-                    </a>
-                </li>
-                <li>
-    <a href="{{ route('dashboardGestionVoyage') }}" class="flex items-center p-3 rounded-lg hover:bg-white hover:bg-opacity-20 transition-all duration-300 group">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3 group-hover:scale-110 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.5 4.5L3 12h3v8l4-1.5V12h3L10.5 4.5z" />
-        </svg>
-        <span class="group-hover:font-medium">Voyage</span>
-    </a>
-</li>
+        <!-- Utilisateur -->
+        <li>
+            <a href="{{ route('GestionUser') }}" class="flex items-center p-3 rounded-lg transition-all duration-300 group 
+                {{ request()->routeIs('GestionUser') ? 'bg-white bg-opacity-20 font-medium' : 'hover:bg-white hover:bg-opacity-20' }}">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3 {{ request()->routeIs('GestionUser') ? 'scale-110' : 'group-hover:scale-110' }} transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
+                </svg>
+                <span>Utilisateur</span>
+            </a>
+        </li>
+        
+        <!-- Voyage -->
+        <li>
+            <a href="{{ route('dashboardGestionVoyage') }}" class="flex items-center p-3 rounded-lg transition-all duration-300 group 
+                {{ request()->routeIs('dashboardGestionVoyage') ? 'bg-white bg-opacity-20 font-medium' : 'hover:bg-white hover:bg-opacity-20' }}">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3 {{ request()->routeIs('dashboardGestionVoyage') ? 'scale-110' : 'group-hover:scale-110' }} transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.5 4.5L3 12h3v8l4-1.5V12h3L10.5 4.5z" />
+                </svg>
+                <span>Voyage</span>
+            </a>
+        </li>
 
+        <!-- Gestion des reservations -->
+        <li>
+            <a href="{{ route('GestionReservation') }}" class="flex items-center p-3 rounded-lg transition-all duration-300 group 
+                {{ request()->routeIs('GestionReservation') ? 'bg-white bg-opacity-20 font-medium' : 'hover:bg-white hover:bg-opacity-20' }}">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3 {{ request()->routeIs('GestionReservation') ? 'scale-110' : 'group-hover:scale-110' }} transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                </svg>
+                <span>Gestion des reservations</span>
+            </a>
+        </li>
+        
+        <!-- Historiques -->
+        <li>
+            <a href="" class="flex items-center p-3 rounded-lg transition-all duration-300 group 
+                {{ request()->is('historique*') ? 'bg-white bg-opacity-20 font-medium' : 'hover:bg-white hover:bg-opacity-20' }}">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3 {{ request()->is('historique*') ? 'scale-110' : 'group-hover:scale-110' }} transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                <span>Historiques</span>
+            </a>
+        </li>
 
-                <li>
-                    <a href="{{ route('GestionReservation') }}" class="flex items-center p-3 rounded-lg hover:bg-white hover:bg-opacity-20 transition-all duration-300 group">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3 group-hover:scale-110 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                        </svg>
-                        <span class="group-hover:font-medium">Gestionhh des reservations</span>
-                    </a>
-                </li>
-                <!-- Historiques -->
-                <li>
-                    <a href="" class="flex items-center p-3 rounded-lg hover:bg-white hover:bg-opacity-20 transition-all duration-300 group">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3 group-hover:scale-110 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                        </svg>
-                        <span class="group-hover:font-medium">Historiques</span>
-                    </a>
-                </li>
+        <!-- Notifications -->
+        <li>
+            <a href="" class="flex items-center p-3 rounded-lg transition-all duration-300 group 
+                {{ request()->is('notifications*') ? 'bg-white bg-opacity-20 font-medium' : 'hover:bg-white hover:bg-opacity-20' }}">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3 {{ request()->is('notifications*') ? 'scale-110' : 'group-hover:scale-110' }} transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
+                </svg>
+                <span>Notifications</span>
+            </a>
+        </li>
 
-                <!-- Notifications -->
-                <li>
-                    <a href="" class="flex items-center p-3 rounded-lg hover:bg-white hover:bg-opacity-20 transition-all duration-300 group">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3 group-hover:scale-110 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
-                        </svg>
-                        <span class="group-hover:font-medium">Notifications</span>
-                    </a>
-                </li>
-
-                <!-- Profil -->
-                <li>
-                    <a href="{{ route('profile.edit') }}" class="flex items-center p-3 rounded-lg hover:bg-white hover:bg-opacity-20 transition-all duration-300 group">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3 group-hover:scale-110 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                        </svg>
-                        <span class="group-hover:font-medium">Profil</span>
-                    </a>
-                </li>
-                
-                <!-- Déconnexion -->
-                <li class="mt-6 pt-4 border-t border-[#0C4069]/30">
-                    <form action="{{ route('logout') }}" method="post" class="w-full">
-                        @csrf
-                        <button type="submit" class="flex items-center w-full p-3 rounded-lg hover:bg-white hover:bg-opacity-20 transition-all duration-300 group">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3 group-hover:scale-110 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
-                            </svg>
-                            <span class="group-hover:font-medium">Déconnexion</span>
-                        </button>
-                    </form>
-                </li>
-            </ul>  
-        </div>
+        <!-- Profil -->
+        <li>
+            <a href="{{ route('profile.edit') }}" class="flex items-center p-3 rounded-lg transition-all duration-300 group 
+                {{ request()->routeIs('profile.edit') ? 'bg-white bg-opacity-20 font-medium' : 'hover:bg-white hover:bg-opacity-20' }}">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3 {{ request()->routeIs('profile.edit') ? 'scale-110' : 'group-hover:scale-110' }} transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                </svg>
+                <span>Profil</span>
+            </a>
+        </li>
+        
+        <!-- Déconnexion -->
+        <li class="mt-6 pt-4 border-t border-[#0C4069]/30">
+            <form action="{{ route('logout') }}" method="post" class="w-full">
+                @csrf
+                <button type="submit" class="flex items-center w-full p-3 rounded-lg hover:bg-white hover:bg-opacity-20 transition-all duration-300 group">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3 group-hover:scale-110 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+                    </svg>
+                    <span class="group-hover:font-medium">Déconnexion</span>
+                </button>
+            </form>
+        </li>
+    </ul>  
+</div>
 
         <!-- Main Content (85%) -->
         <div class="p-6">
@@ -129,7 +142,7 @@
                         </div>
                         <div>
                             <h3 class="text-gray-500 font-medium">Réservations en attente</h3>
-                            <p class="text-3xl font-bold text-[#0C4069]"></p>
+                            <p class="text-3xl font-bold text-[#0C4069]">{{ App\Models\Reservation::where('statut', 'en_attente')->count() }}</p>
                         </div>
                     </div>
                 </div>
@@ -159,8 +172,8 @@
                             </svg>
                         </div>
                         <div>
-                            <h3 class="text-gray-500 font-medium">Revenus mensuels</h3>
-                            <p class="text-3xl font-bold text-[#0C4069]">458,750 F CFA</p>
+                            <h3 class="text-gray-500 font-medium">Réservations annulée</h3>
+                            <p class="text-3xl font-bold text-[#0C4069]">{{ App\Models\Reservation::where('statut', 'annulée')->count() }}</p>
                         </div>
                     </div>
                 </div>

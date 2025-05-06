@@ -6,7 +6,7 @@
     </x-slot>
     <div class="grid grid-cols-[15%_85%] min-h-screen bg-gray-50">
         <!-- Sidebar (15%) -->
-        <div class="bg-[#0C4069] h-full w-[188px] sticky top-0">
+         <div class="bg-[#0C4069] h-full w-[188px] sticky top-0">
             <ul class="text-white p-4 space-y-3">
             <li>
                     <a href="{{ route('dashboard') }}" class="flex items-center p-3 rounded-lg hover:bg-white hover:bg-opacity-20 transition-all duration-300 group">
@@ -99,90 +99,145 @@
         </div>
 
         <!-- Le reste de votre contenu ici -->
-        <div class="py-12">
-            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                    <div class="p-6 text-gray-900">
-                        <!-- En-tête -->
-                        <div class="grid grid-cols-1 md:grid-cols-2 items-center p-6 bg-gradient-to-r from-[#0C4069] to-[#D88F42] rounded-xl shadow-lg mb-6">
+        <div class="py-8">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <!-- En-tête améliorée -->
+        <div class="bg-gradient-to-r from-[#0C4069] to-[#D88F42] rounded-xl shadow-lg p-6 mb-8 relative overflow-hidden">
+            <div class="absolute inset-0 opacity-10 bg-white"></div>
+            <div class="relative z-10 grid grid-cols-1 md:grid-cols-2 items-center">
                 <div>
-                    <h1 class="text-2xl text-white font-bold">Gestion des Voyages</h1>
-                    <p class="text-white/90 mt-2">Gérez les destinations, les circuits et les offres spéciales.</p>
+                    <h1 class="text-2xl md:text-3xl font-bold text-white">Gestion des Voyages</h1>
+                    <p class="text-white/90 mt-2 max-w-lg">Administrez l'ensemble des offres de voyages disponibles</p>
                 </div>
                 <div class="flex justify-end mt-4 md:mt-0">
-                    
-                    <button onclick="openAddModal()" class="flex items-center gap-2 bg-white text-[#D88F42] font-medium py-3 px-6 rounded-lg shadow-md transition-all duration-300 hover:bg-[#0C4069] hover:text-white hover:shadow-xl active:scale-95 transform hover:-translate-y-1">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                    <button onclick="openAddModal()" 
+                        class="flex items-center gap-2 bg-white text-[#D88F42] font-medium py-3 px-6 rounded-lg shadow-md transition-all duration-300 hover:bg-[#0C4069] hover:text-white hover:shadow-lg active:scale-[0.98] group">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 group-hover:rotate-90 transition-transform" viewBox="0 0 20 20" fill="currentColor">
                             <path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd" />
                         </svg>
                         Ajouter un voyage
-                
                     </button>
-                
-                </div>
-            </div>
-                        <div class="flex justify-between items-center mb-6">
-
-                           
-                        </div>
-
-                        <!-- Tableau des voyages -->
-                        <div class="overflow-x-auto">
-                            <table class="min-w-full divide-y divide-gray-200">
-                                <thead class="bg-gray-50">
-                                    <tr>
-                                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Image</th>
-                                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Destination</th>
-                                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Ville de départ</th>
-                                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Description</th>
-                                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Prix</th>
-                                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Date de départ</th>
-                                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Actions</th>
-                                    </tr>
-                                </thead>
-                                <tbody class="bg-white divide-y divide-gray-200">
-                                    @foreach($voyages as $voyage)
-                                    <tr>
-                                        <!-- Dans le tableau -->
-                                        <td class="px-6 py-4">
-                                            <img 
-                                                src="{{ asset('storage/' . $voyage->image) }}" 
-                                                alt="{{ $voyage->destination }}" 
-                                                class="h-20 w-20 object-cover rounded"
-                                                onerror="this.onerror=null; this.src='/images/default.jpg';"
-                                            >
-                                        </td>
-                                        <td class="px-6 py-4">{{ $voyage->destination }}</td>
-                                        <td class="px-6 py-4">{{ $voyage->ville_depart }}</td>
-                                        <td class="px-6 py-4">{{ Str::limit($voyage->description, 50) }}</td>
-                                        <td class="px-6 py-4">{{ $voyage->prix_formate }}</td>
-                                        <td class="px-6 py-4">{{ \Carbon\Carbon::parse($voyage->date_depart)->format('d/m/Y') }}</td>
-                                        <td class="px-6 py-4 text-sm">
-                                            <button onclick="openEditModal({{ $voyage->id }})" class="text-blue-600 hover:text-blue-900 mr-2">
-                                                <i class="fas fa-edit"></i> Modifier
-                                            </button>
-                                            <form action="{{ route('voyages.destroy', $voyage->id) }}" method="POST" class="inline">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class="text-red-600 hover:text-red-900" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce voyage ?')">
-                                                    <i class="fas fa-trash"></i> Supprimer
-                                                </button>
-                                            </form>
-                                        </td>
-                                    </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
-                        </div>
-
-                        <!-- Pagination -->
-                        <div class="mt-4">
-                            {{ $voyages->links() }}
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
+
+        <!-- Contenu principal -->
+        <div class="bg-white shadow-xl rounded-xl overflow-hidden">
+            <!-- Barre de recherche -->
+            <div class="px-6 py-4 border-b border-gray-200 bg-gray-50 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                <div>
+                    <h2 class="text-lg font-semibold text-gray-800">Liste des voyages</h2>
+                    <p class="text-sm text-gray-500">{{ $voyages->total() }} voyages disponibles</p>
+                </div>
+                
+                <div class="w-full md:w-auto">
+                    <div class="relative flex-grow">
+                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                            <svg class="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                            </svg>
+                        </div>
+                        <input type="text" placeholder="Rechercher un voyage..." 
+                            class="pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#0C4069] focus:border-[#0C4069] w-full">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tableau des voyages amélioré -->
+            <div class="overflow-x-auto">
+                <table class="min-w-full divide-y divide-gray-200">
+                    <thead class="bg-gray-100">
+                        <tr>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Destination</th>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider hidden lg:table-cell">Départ</th>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider hidden xl:table-cell">Description</th>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Prix</th>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Date</th>
+                            <th scope="col" class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody class="bg-white divide-y divide-gray-200">
+                        @foreach($voyages as $voyage)
+                        <tr class="hover:bg-gray-50 transition-colors duration-150">
+                            <!-- Destination avec image -->
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="flex items-center">
+                                    <div class="flex-shrink-0 h-16 w-16 rounded-md overflow-hidden">
+                                        <img 
+                                            src="{{ asset('storage/' . $voyage->image) }}" 
+                                            alt="{{ $voyage->destination }}" 
+                                            class="h-full w-full object-cover"
+                                            onerror="this.onerror=null; this.src='/images/default.jpg';"
+                                        >
+                                    </div>
+                                    <div class="ml-4">
+                                        <div class="text-sm font-medium text-gray-900">{{ $voyage->destination }}</div>
+                                        <div class="text-sm text-gray-500 lg:hidden">{{ $voyage->ville_depart }}</div>
+                                    </div>
+                                </div>
+                            </td>
+                            
+                            <!-- Ville de départ -->
+                            <td class="px-6 py-4 whitespace-nowrap hidden lg:table-cell">
+                                <div class="text-sm text-gray-900">{{ $voyage->ville_depart }}</div>
+                            </td>
+                            
+                            <!-- Description -->
+                            <td class="px-6 py-4 hidden xl:table-cell">
+                                <div class="text-sm text-gray-500 max-w-xs truncate">{{ $voyage->description }}</div>
+                            </td>
+                            
+                            <!-- Prix -->
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="text-sm font-medium text-[#0C4069]">{{ $voyage->prix_formate }}</div>
+                            </td>
+                            
+                            <!-- Date de départ -->
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="text-sm text-gray-900">{{ \Carbon\Carbon::parse($voyage->date_depart)->format('d/m/Y') }}</div>
+                                <div class="text-xs text-gray-500">
+                                    {{ \Carbon\Carbon::parse($voyage->date_depart)->diffForHumans() }}
+                                </div>
+                            </td>
+                            
+                            <!-- Actions -->
+                            <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                <div class="flex justify-end space-x-3">
+                                    <button onclick="openEditModal({{ $voyage->id }})" 
+                                        class="text-[#0C4069] hover:text-[#0C4069]/80 transition-colors"
+                                        title="Modifier">
+                                        <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                                        </svg>
+                                    </button>
+                                    
+                                    <form action="{{ route('voyages.destroy', $voyage->id) }}" method="POST" class="inline">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" 
+                                            onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce voyage ?')"
+                                            class="text-red-600 hover:text-red-800 transition-colors"
+                                            title="Supprimer">
+                                            <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                            </svg>
+                                        </button>
+                                    </form>
+                                </div>
+                            </td>
+                        </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Pagination -->
+            <div class="px-6 py-4 bg-gray-50 border-t border-gray-200">
+                {{ $voyages->links() }}
+            </div>
+        </div>
+    </div>
+</div>
     </div>
 
     <!-- Modal d'ajout -->
